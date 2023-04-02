@@ -24,7 +24,7 @@ src/EGL_Mesh.cpp
 src/EGL_Shader.cpp
 src/EGL_Func.cpp
 src/EGL_Poly.cpp
-src/EGL_Polar.cpp
+src/EGL_Point.cpp
 stb/stb_image.c
 )
 

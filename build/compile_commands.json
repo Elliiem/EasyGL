@@ -31,7 +31,7 @@
 },
 {
   "directory": "/home/elliem/cpp/EGL/build",
-  "command": "/usr/bin/g++ -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/. -I/home/elliem/cpp/EGL/stb -I/home/elliem/cpp/EGL/./include -g -std=gnu++17 -o CMakeFiles/EGL.dir/src/EGL_Polar.cpp.o -c /home/elliem/cpp/EGL/src/EGL_Polar.cpp",
-  "file": "/home/elliem/cpp/EGL/src/EGL_Polar.cpp"
+  "command": "/usr/bin/g++ -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/. -I/home/elliem/cpp/EGL/stb -I/home/elliem/cpp/EGL/./include -g -std=gnu++17 -o CMakeFiles/EGL.dir/src/EGL_Point.cpp.o -c /home/elliem/cpp/EGL/src/EGL_Point.cpp",
+  "file": "/home/elliem/cpp/EGL/src/EGL_Point.cpp"
 }
 ]

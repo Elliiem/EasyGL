@@ -46,39 +46,6 @@ struct EGL_Color{
     float a;
 };
 
-struct EGL_Point{
-    EGL_Point(glm::vec3 Vec){
-        vec = Vec;
-        x = Vec.x;
-        y = Vec.y;
-        z = Vec.z;
-    }
-
-    EGL_Point(float X,float Y,float Z){
-        x = X;
-        y = Y;
-        z = Z;
-    }
-
-    EGL_Point(){
-        x = 0;
-        y = 0;
-        z = 0;
-    }
-
-    EGL_Point operator+(EGL_Point Other){
-        return EGL_Point(x+Other.x,y+Other.y,z+Other.z);
-    }
-    EGL_Point operator-(EGL_Point Other){
-        return EGL_Point(x-Other.x,y-Other.y,z-Other.z);
-    }
-
-    glm::vec3 vec;
-    float x;
-    float y;
-    float z;
-};
-
 struct EGL_Deg{
     EGL_Deg(){
         val = 0;
@@ -137,18 +104,60 @@ struct EGL_Deg{
     float val;
 };
 
-struct EGL_Polar{
-    EGL_Polar(float x,float y,float z);
-    
-    EGL_Point Carthesian();
+struct EGL_Vector{
+    EGL_Vector(float x,float y,float z){
+        this->x = x;
+        this->y = y;
+        this->z = z;
+    }
+    EGL_Vector(){
+    }
 
-    float lx;
-    float ly;
-    float lz;
-    EGL_Deg dx;
-    EGL_Deg dy;
-    EGL_Deg dz;
-    EGL_Point pos;
+    float x,y,z;
+};
+
+struct EGL_StaticPoint{
+    EGL_StaticPoint(float x,float y,float z){
+        this->x = x;
+        this->y = y;
+        this->z = z;
+        this->vec = glm::vec3(x,y,z);
+    }
+
+    float GetX(){
+        return x;
+    }
+    float GetY(){
+        return y;
+    }
+    float GetZ(){
+        return z;
+    }
+    glm::vec3 GetVec(){
+        return vec;
+    }
+
+    private:
+    float x,y,z;
+    glm::vec3 vec;    
+};
+
+struct EGL_Point{
+    // Initializers
+    EGL_Point(glm::vec3 Vec);
+    EGL_Point(float x,float y,float z);
+    EGL_Point();
+
+    // Operators
+    EGL_Point operator+(EGL_Point other);
+    EGL_Point operator-(EGL_Point other);
+
+    void RotateZ(float deg);
+    void RotateX(float deg);
+    void RotateY(float deg);
+
+    glm::vec3 vec;
+    float x,y,z;
 };
 
 // EGL Window

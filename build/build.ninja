@@ -91,8 +91,8 @@ build CMakeFiles/EGL.dir/src/EGL_Poly.cpp.o: CXX_COMPILER__EGL_Debug /home/ellie
   OBJECT_DIR = CMakeFiles/EGL.dir
   OBJECT_FILE_DIR = CMakeFiles/EGL.dir/src
 
-build CMakeFiles/EGL.dir/src/EGL_Polar.cpp.o: CXX_COMPILER__EGL_Debug /home/elliem/cpp/EGL/src/EGL_Polar.cpp || cmake_object_order_depends_target_EGL
-  DEP_FILE = CMakeFiles/EGL.dir/src/EGL_Polar.cpp.o.d
+build CMakeFiles/EGL.dir/src/EGL_Point.cpp.o: CXX_COMPILER__EGL_Debug /home/elliem/cpp/EGL/src/EGL_Point.cpp || cmake_object_order_depends_target_EGL
+  DEP_FILE = CMakeFiles/EGL.dir/src/EGL_Point.cpp.o.d
   FLAGS = -g -std=gnu++17
   INCLUDES = -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/. -I/home/elliem/cpp/EGL/stb -I/home/elliem/cpp/EGL/./include
   OBJECT_DIR = CMakeFiles/EGL.dir
@@ -106,7 +106,7 @@ build CMakeFiles/EGL.dir/src/EGL_Polar.cpp.o: CXX_COMPILER__EGL_Debug /home/elli
 #############################################
 # Link the executable EGL
 
-build EGL: CXX_EXECUTABLE_LINKER__EGL_Debug CMakeFiles/EGL.dir/main.cpp.o CMakeFiles/EGL.dir/src/EGL_Window.cpp.o CMakeFiles/EGL.dir/src/EGL_Mesh.cpp.o CMakeFiles/EGL.dir/src/EGL_Shader.cpp.o CMakeFiles/EGL.dir/src/EGL_Func.cpp.o CMakeFiles/EGL.dir/src/EGL_Poly.cpp.o CMakeFiles/EGL.dir/src/EGL_Polar.cpp.o
+build EGL: CXX_EXECUTABLE_LINKER__EGL_Debug CMakeFiles/EGL.dir/main.cpp.o CMakeFiles/EGL.dir/src/EGL_Window.cpp.o CMakeFiles/EGL.dir/src/EGL_Mesh.cpp.o CMakeFiles/EGL.dir/src/EGL_Shader.cpp.o CMakeFiles/EGL.dir/src/EGL_Func.cpp.o CMakeFiles/EGL.dir/src/EGL_Poly.cpp.o CMakeFiles/EGL.dir/src/EGL_Point.cpp.o
   FLAGS = -g
   LINK_LIBRARIES = -lfmt  -lOpenGL  -lGLEW  -lSDL2
   OBJECT_DIR = CMakeFiles/EGL.dir
