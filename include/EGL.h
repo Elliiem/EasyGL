@@ -58,13 +58,13 @@ struct EGL_Deg{
         float tval = val;
         float times = ((tval+Deg)/360);
         tval = 360*(times-int(times));
-        return abs(round(tval*1000)/1000);
+        return abs(round(tval*10)/10);
     }
 
     void operator+=(float Deg){
         float times = ((val+Deg)/360);
         val = 360*(times-int(times));
-        val = abs(round(val*1000)/1000);
+        val = abs(round(val*10)/10);
     }
 
     float operator-(float Deg){
@@ -81,7 +81,7 @@ struct EGL_Deg{
         }
         if(tval == 360)
             return 0.0;
-        return abs(round(tval*1000)/1000);
+        return abs(round(tval*10)/10);
     }
 
     void operator-=(float Deg){
@@ -98,7 +98,7 @@ struct EGL_Deg{
         if(val == 360)
             val = 0;
         else
-            val = abs(round(val*1000)/1000);
+            val = abs(round(val*10)/10);
     }
 
     float val;
@@ -111,6 +111,9 @@ struct EGL_Vector{
         this->z = z;
     }
     EGL_Vector(){
+        x = 0;
+        y = 0;
+        z = 0;
     }
 
     float x,y,z;
@@ -144,7 +147,7 @@ struct EGL_StaticPoint{
 
 struct EGL_Point{
     // Initializers
-    EGL_Point(glm::vec3 Vec);
+    EGL_Point(EGL_Vector vec);
     EGL_Point(float x,float y,float z);
     EGL_Point();
 
@@ -155,9 +158,11 @@ struct EGL_Point{
     void RotateZ(float deg);
     void RotateX(float deg);
     void RotateY(float deg);
-
-    glm::vec3 vec;
+    
     float x,y,z;
+    protected:
+    EGL_Vector vec;
+    EGL_Vector rot;
 };
 
 // EGL Window

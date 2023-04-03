@@ -1,19 +1,6 @@
 #include "EGL.h"
 
-
-//Rz
-// cos() −sin() 0
-// sin()  cos() 0
-//  0      0    1
-//Rx
-// 1   0      0
-// 0 cos() -sin()
-// 0 sin()  cos()
-//Ry
-// cos()  0 sin()
-//   0    1   0
-// -sin() 0 cos()
-
+//Helpers
 float Rad(float deg){
   return deg * 0.017453293;
 }
@@ -24,15 +11,15 @@ float Deg(float rad){
 
 
 //Initializers
-EGL_Point::EGL_Point(glm::vec3 vec){
+EGL_Point::EGL_Point(EGL_Vector vec){
   this->vec = vec;
   x = vec.x;
   y = vec.y;
-  z = vec.z; 
+  z = vec.z;
 }
 
 EGL_Point::EGL_Point(float x,float y,float z){
-  vec = glm::vec3(x,y,z);
+  vec = EGL_Vector(x,y,z);
   this->x = x;
   this->y = y;
   this->z = z;
@@ -42,7 +29,7 @@ EGL_Point::EGL_Point(){
   x = 0;
   y = 0;
   z = 0;
-  vec = glm::vec3(0,0,0);
+  vec = EGL_Vector(0,0,0);
 }
 
 //Operators
@@ -55,9 +42,52 @@ EGL_Point EGL_Point::operator-(EGL_Point other){
 }
 
 
+/*
+-----------# Rz #----------
+▛  cos()  -sin()     0    ▜ 
+▌  sin()   cos()     0    ▐  
+▙    0       0       1    ▟ 
+-----------# Rx #----------
+▛    1       0       0    ▜
+▌    0     cos()  -sin()  ▐
+▙    0     sin()   cos()  ▟
+-----------# Ry #----------
+▛  cos()     0     sin()  ▜
+▌    0       1       0    ▐
+▙ -sin()     0     cos()  ▟ 
+*/
 void EGL_Point::RotateZ(float deg){
-  x = (x*cos(Rad(deg)))-(y*sin(Rad(deg)));
-  y = (x*sin(Rad(deg)))+(y*cos(Rad(deg)));
-  vec = glm::vec3(x,y,z);
-  fmt::print("{} {} {}\n",x,y,z);
+  rot.z += deg;
+  if(rot.z>=360){
+    rot.z = rot.z-360;
+  }
+  else if(rot.z<0){
+    rot.z = rot.z+360;
+  }
+  x = (vec.x*cos(Rad(rot.z)))-(vec.y*sin(Rad(rot.z)));
+  y = (vec.x*sin(Rad(rot.z)))+(vec.y*cos(Rad(rot.z)));
+}
+
+void EGL_Point::RotateX(float deg){
+  rot.x += deg;
+  if(rot.x>=360){
+    rot.x = rot.x-360;
+  }
+  else if(rot.x<0){
+    rot.x = rot.x+360;
+  }
+  y = (vec.y*cos(Rad(rot.x)))-(vec.z*sin(Rad(rot.x)));
+  z = (vec.y*sin(Rad(rot.x)))+(vec.z*cos(Rad(rot.x)));
+}
+
+void EGL_Point::RotateY(float deg){
+  rot.y += deg;
+  if(rot.y>=360){
+    rot.y = rot.y-360;
+  }
+  else if(rot.y<0){
+    rot.y = rot.y+360;
+  }
+  x = (vec.x*cos(Rad(rot.y)))+(vec.z*sin(Rad(rot.y)));
+  z = (vec.x*(-sin(Rad(rot.y))))+(vec.z*cos(Rad(rot.y)));
 }
