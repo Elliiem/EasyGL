@@ -32,15 +32,6 @@ EGL_Point::EGL_Point(){
   vec = EGL_Vector(0,0,0);
 }
 
-//Operators
-EGL_Point EGL_Point::operator+(EGL_Point other){
-  return EGL_Point(x+other.x,y+other.y,z+other.z);
-}
-
-EGL_Point EGL_Point::operator-(EGL_Point other){
-  return EGL_Point(x-other.x,y-other.y,z-other.z);
-}
-
 
 /*
 -----------# Rz #----------
@@ -56,6 +47,7 @@ EGL_Point EGL_Point::operator-(EGL_Point other){
 ▌    0       1       0    ▐
 ▙ -sin()     0     cos()  ▟ 
 */
+
 void EGL_Point::RotateZ(float deg){
   rot.z += deg;
   if(rot.z>=360){

@@ -46,64 +46,6 @@ struct EGL_Color{
     float a;
 };
 
-struct EGL_Deg{
-    EGL_Deg(){
-        val = 0;
-    }
-    EGL_Deg(float Deg){
-        val = Deg;
-    }
-    
-    float operator+(float Deg){
-        float tval = val;
-        float times = ((tval+Deg)/360);
-        tval = 360*(times-int(times));
-        return abs(round(tval*10)/10);
-    }
-
-    void operator+=(float Deg){
-        float times = ((val+Deg)/360);
-        val = 360*(times-int(times));
-        val = abs(round(val*10)/10);
-    }
-
-    float operator-(float Deg){
-        float times;
-        float tval;
-        tval = val-Deg;
-        if(tval >= 0){
-            times = tval/360;
-            tval = 360*(times-int(times));
-        }
-        else{
-            times = abs(tval/360);
-            tval = 360*(1-(times-int(times)));
-        }
-        if(tval == 360)
-            return 0.0;
-        return abs(round(tval*10)/10);
-    }
-
-    void operator-=(float Deg){
-        float times;
-        val -= Deg;
-        if(val >= 0){
-            times = val/360;
-            val = 360*(times-int(times));
-        }
-        else{
-            times = abs(val/360);
-            val = 360*(1-(times-int(times)));
-        }
-        if(val == 360)
-            val = 0;
-        else
-            val = abs(round(val*10)/10);
-    }
-
-    float val;
-};
-
 struct EGL_Vector{
     EGL_Vector(float x,float y,float z){
         this->x = x;
@@ -119,41 +61,11 @@ struct EGL_Vector{
     float x,y,z;
 };
 
-struct EGL_StaticPoint{
-    EGL_StaticPoint(float x,float y,float z){
-        this->x = x;
-        this->y = y;
-        this->z = z;
-        this->vec = glm::vec3(x,y,z);
-    }
-
-    float GetX(){
-        return x;
-    }
-    float GetY(){
-        return y;
-    }
-    float GetZ(){
-        return z;
-    }
-    glm::vec3 GetVec(){
-        return vec;
-    }
-
-    private:
-    float x,y,z;
-    glm::vec3 vec;    
-};
-
 struct EGL_Point{
     // Initializers
     EGL_Point(EGL_Vector vec);
     EGL_Point(float x,float y,float z);
     EGL_Point();
-
-    // Operators
-    EGL_Point operator+(EGL_Point other);
-    EGL_Point operator-(EGL_Point other);
 
     void RotateZ(float deg);
     void RotateX(float deg);
