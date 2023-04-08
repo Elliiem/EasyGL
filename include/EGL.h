@@ -144,6 +144,9 @@ class EGL_Shader{
 class EGL_Poly{
     public:
     EGL_Poly(EGL_Window* win, std::vector<EGL_Point> Points);
+    EGL_Poly(){
+
+    }
     ~EGL_Poly();
 
     void Draw();
@@ -160,6 +163,17 @@ class EGL_Poly{
     EGL_Window* win;
     EGL_Point pos;
 };
+
+class EGL_Obj{
+    public:
+    EGL_Obj(EGL_Poly poly);
+
+    EGL_Vector pos;
+    private:
+    EGL_Poly poly;
+
+};
+
 
 
 // EGL ClampCoords
