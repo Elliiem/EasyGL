@@ -5,10 +5,6 @@ float Rad(float deg){
   return deg * 0.017453293;
 }
 
-float Deg(float rad){
-  return rad * 57.29577951;
-}
-
 
 //Initializers
 EGL_Point::EGL_Point(EGL_Vector vec){
@@ -49,6 +45,9 @@ EGL_Point::EGL_Point(){
 */
 
 void EGL_Point::RotateZ(float deg){
+  if(deg == 0){
+    return;
+  }
   rot.z += deg;
   if(rot.z>=360){
     rot.z = rot.z-360;
@@ -61,6 +60,9 @@ void EGL_Point::RotateZ(float deg){
 }
 
 void EGL_Point::RotateX(float deg){
+  if(deg == 0){
+    return;
+  }
   rot.x += deg;
   if(rot.x>=360){
     rot.x = rot.x-360;
@@ -73,6 +75,9 @@ void EGL_Point::RotateX(float deg){
 }
 
 void EGL_Point::RotateY(float deg){
+  if(deg == 0){
+    return;
+  }
   rot.y += deg;
   if(rot.y>=360){
     rot.y = rot.y-360;

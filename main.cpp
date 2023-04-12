@@ -19,13 +19,8 @@ int main()
     while(!win.quit)
     {
         win.Clear();
-
         poly.Draw();
-        points.at(0).RotateZ(-3);
-        points.at(1).RotateZ(-3);
-        points.at(2).RotateZ(-3);
-        points.at(3).RotateZ(-3);
-        poly2.Change(points);
+        poly2.Rotate(0,0,0.1);
         poly2.Draw(100,100,0);
         win.Update();
     }

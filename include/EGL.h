@@ -72,7 +72,6 @@ struct EGL_Point{
     void RotateY(float deg);
     
     float x,y,z;
-    protected:
     EGL_Vector vec;
     EGL_Vector rot;
 };
@@ -143,7 +142,7 @@ class EGL_Shader{
 // EGL Poly
 class EGL_Poly{
     public:
-    EGL_Poly(EGL_Window* win, std::vector<EGL_Point> Points);
+    EGL_Poly(EGL_Window* win, std::vector<EGL_Point> points);
     EGL_Poly(){
 
     }
@@ -151,26 +150,21 @@ class EGL_Poly{
 
     void Draw();
     void Draw(int x,int y,int z);
-    void Change(std::vector<EGL_Point> Points);
+    void Change(std::vector<EGL_Point> points);
     void Change();
-
-    private:
+    void Rotate(float x,float y,float z);
     
+    
+    private:
     void ChangeVerts();
 
     std::vector<EGL_Point> points;
     EGL_Mesh* mesh;
     EGL_Window* win;
-    EGL_Point pos;
+    EGL_Vector pos;
 };
 
 class EGL_Obj{
-    public:
-    EGL_Obj(EGL_Poly poly);
-
-    EGL_Vector pos;
-    private:
-    EGL_Poly poly;
 
 };
 
