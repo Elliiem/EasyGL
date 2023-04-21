@@ -1,27 +1,33 @@
 #include "EGL.h"
 
+EGL_Window win(1920,1080,"TEST");
+
 int main()
 {
-    EGL_Window win(1920,1080,"TEST");
-
     EGL_Shader shader("/home/elliem/cpp/EGL/shaders/basic_shader");
-
-    std::vector<EGL_Point> points{EGL_Point(-10,-10,0),EGL_Point(10,-10,0),EGL_Point(10,10,0),EGL_Point(-10,10,0)};
-    std::vector<EGL_Point> points2{EGL_Point(0,1080,0),EGL_Point(1000,500,0),EGL_Point(1920,1080,0)};
-    EGL_Poly poly(&win,points);
-    EGL_Poly poly2(&win,points2);
-
     shader.Bind();
 
-    poly2.Change(points);
-    poly.Change(points2);
-
+    std::vector<EGL_Point> points{EGL_Point(0,50,0),EGL_Point(50,-50,0),EGL_Point(0,-30,0),EGL_Point(-50,-50,0)};
+    EGL_PhysicsObject foo(points);
+    EGL_PhysicsObject bar(points);
+    foo.pos = EGL_Vector(1000,500,0);
     while(!win.quit)
     {
         win.Clear();
-        poly.Draw();
-        poly2.Rotate(0,0,0.1);
-        poly2.Draw(100,100,0);
+        
+        //foo.Update();
+        //bar.Draw();
+        bar.pos = win.mouse;
+        
+        //foo.box.CheckCollision(&bar.box);
+        //bar.box.CheckCollision(&foo.box);
+        if(foo.box.hits.size()!=0 || bar.box.hits.size()!=0){
+            win.SetClearCol(1,1,1,1);
+        } else {
+            win.SetClearCol(0,0,0,1);
+        }
+
+
         win.Update();
     }
 

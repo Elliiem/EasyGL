@@ -1,20 +1,15 @@
 #include "EGL.h"
 
-EGL_Poly::EGL_Poly(EGL_Window* Win, std::vector<EGL_Point> points){
+EGL_Poly::EGL_Poly(std::vector<EGL_Point> points){
     this->points = points;
-    win = Win;
     std::vector<EGL_Vertex> vertV;
     
     for(int i = 0; i<points.size();i++)
     {
-        vertV.push_back(EGL_ClampCoords(win,points.at(i).x,points.at(i).y,points.at(i).z));
+        vertV.push_back(EGL_ClampCoords(points.at(i).x,points.at(i).y,points.at(i).z));
     }
 
     mesh = new EGL_Mesh(vertV.data(),3);
-}
-
-EGL_Poly::~EGL_Poly(){
-    delete mesh;
 }
 
 void EGL_Poly::Draw(int x,int y,int z){
@@ -32,7 +27,7 @@ void EGL_Poly::ChangeVerts(){
             
     for(int i = 0; i<points.size();i++)
     {
-        vertV.push_back(EGL_ClampCoords(win,pos.x+points.at(i).x,pos.y+points.at(i).y,pos.z+points.at(i).z));
+        vertV.push_back(EGL_ClampCoords(pos.x+points.at(i).x,pos.y+points.at(i).y,pos.z+points.at(i).z));
     }
 
     mesh->Change(vertV.data(),vertV.size());   

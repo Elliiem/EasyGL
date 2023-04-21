@@ -10,6 +10,7 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <map>
 
 //Structs
 struct EGL_Vertex{
@@ -27,7 +28,6 @@ struct EGL_Vertex{
 
     glm::vec3 pos;
 };
-
 struct EGL_Color{
     EGL_Color(float R, float G, float B, float A){
         r = R;
@@ -45,7 +45,6 @@ struct EGL_Color{
     float b;
     float a;
 };
-
 struct EGL_Vector{
     EGL_Vector(float x,float y,float z){
         this->x = x;
@@ -58,9 +57,21 @@ struct EGL_Vector{
         z = 0;
     }
 
+    void operator+=(EGL_Vector other){
+        x += other.x;
+        y += other.y;
+        z += other.z;
+    }
+
+    EGL_Vector operator-(EGL_Vector other){
+        return EGL_Vector(x - other.x,y - other.y,z - other.z);       
+    }
+    EGL_Vector operator+(EGL_Vector other){
+        return EGL_Vector(x + other.x,y + other.y,z + other.z);       
+    }
+
     float x,y,z;
 };
-
 struct EGL_Point{
     // Initializers
     EGL_Point(EGL_Vector vec);
@@ -76,7 +87,11 @@ struct EGL_Point{
     EGL_Vector rot;
 };
 
-// EGL Window
+// Globals
+extern int EGL_WIN_HEIGHT;
+extern int EGL_WIN_WIDTH;
+
+// Window Handling
 class EGL_Window{
     public:
     EGL_Window(int width, int height, std::string name);
@@ -93,14 +108,19 @@ class EGL_Window{
     void SetClearCol(float R,float G,float B,float A);
     void SetClearCol(EGL_Color col);
 
+    std::map<int,bool> keyboard;
+    EGL_Vector mouse;
+
     private:
     EGL_Color clear_col = EGL_Color(0,0,0,1);
     SDL_Event event;
 
     void HandleEvents();
+    void HandleKey();
+    void HandleMouse();
 };
 
-// EGL Mesh
+// Low Level Graphics
 class EGL_Mesh{
     public:
     EGL_Mesh(EGL_Vertex* points, uint8_t num_points = 3);
@@ -124,8 +144,6 @@ class EGL_Mesh{
     uint8_t draw_count;
 
 };
-
-// EGL Shader
 class EGL_Shader{
     public:
     EGL_Shader(const std::string& file_name);
@@ -139,14 +157,13 @@ class EGL_Shader{
     GLuint shaders[NUM_SHADERS];
 };
 
-// EGL Poly
+// Top Level Graphics
 class EGL_Poly{
     public:
-    EGL_Poly(EGL_Window* win, std::vector<EGL_Point> points);
+    EGL_Poly(std::vector<EGL_Point> points);
     EGL_Poly(){
 
     }
-    ~EGL_Poly();
 
     void Draw();
     void Draw(int x,int y,int z);
@@ -154,26 +171,70 @@ class EGL_Poly{
     void Change();
     void Rotate(float x,float y,float z);
     
-    
+    EGL_Vector pos;
+
     private:
     void ChangeVerts();
 
     std::vector<EGL_Point> points;
     EGL_Mesh* mesh;
-    EGL_Window* win;
+};
+
+
+// Physics Engine
+    /*
+    Hitboxes
+        Collision Detection
+            optimally sht like CheckCollision(EGL_Hitbox) and returns a struct with the hit info
+    Collision Handling
+        Calculate New Velocities
+        Calculate New RotForces in z
+    Velocity/Acceleration
+        Gravity
+        Forces (like Thrusters)
+    Rotational Forces
+        only realistic in z
+        other directions just a bit of rotation on collision
+        and let them slowly go back to 0
+    Drawing -> U know
+        Handle Poly
+    */
+
+// Top Level Physics Engine
+// Should only need to tell every Physics Object to Check for Collisions with Objects nearby
+class EGL_Physics{
+
+};
+
+class EGL_Hitbox{
+    public:
+    EGL_Hitbox(std::vector<EGL_Vector> points);
+    EGL_Hitbox(std::vector<EGL_Point> points);
+    EGL_Hitbox(){
+
+    }
+    
+    std::vector<EGL_Vector> points;
     EGL_Vector pos;
+    EGL_Hitbox* other;
+    std::vector<EGL_Vector> hits;
+
+    void CheckCollision(EGL_Hitbox* other);
+    void UpdateHitbox(std::vector<EGL_Point> points);
 };
 
-class EGL_Obj{
+class EGL_PhysicsObject : public EGL_Poly{
+    public:
+    EGL_PhysicsObject(std::vector<EGL_Point> points);
 
+    std::vector<EGL_Point> points;
+    EGL_Hitbox box;
+
+    void Update();
 };
 
-
-
-// EGL ClampCoords
-EGL_Vertex EGL_ClampCoords(EGL_Window* win,float x,float y,float z);
-
-
-
+//EGL Helper Functions
+EGL_Vertex EGL_ClampCoords(float x,float y,float z);
+EGL_Vector ToVector(EGL_Point point);
 
 #endif

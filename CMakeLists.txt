@@ -25,12 +25,13 @@ src/EGL_Shader.cpp
 src/EGL_Func.cpp
 src/EGL_Poly.cpp
 src/EGL_Point.cpp
+src/EGL_Hitbox.cpp
+src/EGL_PhysicsObject.cpp
 stb/stb_image.c
 )
 
-target_include_directories(EGL PUBLIC 
-. 
-stb
+target_include_directories(EGL PUBLIC  
+./stb
 ./include
 )
 

@@ -7,7 +7,7 @@
 				{
 					"build" : ".",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-.-Debug-2ca5318921207a86550a.json",
+					"jsonFile" : "directory-.-Debug-362941f6d29dd746c971.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.5"
@@ -40,7 +40,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "EGL::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-EGL-Debug-db05e40dafb4b15ae862.json",
+					"jsonFile" : "target-EGL-Debug-11165637a45263a40c17.json",
 					"name" : "EGL",
 					"projectIndex" : 0
 				}

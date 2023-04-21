@@ -44,6 +44,7 @@ EGL_Point::EGL_Point(){
 ▙ -sin()     0     cos()  ▟ 
 */
 
+
 void EGL_Point::RotateZ(float deg){
   if(deg == 0){
     return;
