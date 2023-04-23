@@ -25,6 +25,10 @@ struct EGL_Vertex{
     EGL_Vertex(EGL_Vertex* point){
         pos = point->pos;
     }
+    
+    EGL_Vertex(){
+
+    }
 
     glm::vec3 pos;
 };
@@ -97,40 +101,61 @@ class EGL_Window{
     EGL_Window(int width, int height, std::string name);
     ~EGL_Window();
 
-    SDL_Window* SDL_win;
-    SDL_GLContext gl_cont;
-
-    bool quit = 0;
-
-    void SwapBuffers();
     void Update();
+    void SwapBuffers();
     void Clear();
+
+    bool ShouldQuit();
+
     void SetClearCol(float R,float G,float B,float A);
     void SetClearCol(EGL_Color col);
 
-    std::map<int,bool> keyboard;
-    EGL_Vector mouse;
-
-    private:
-    EGL_Color clear_col = EGL_Color(0,0,0,1);
-    SDL_Event event;
-
+    /*This will be replaced by a input class*/
     void HandleEvents();
     void HandleKey();
     void HandleMouse();
+    
+    
+    // Input Storage, All will be under one class!
+    // Keyboard Inputs stored on a map 
+    // whether a key is pressed or not is mapped to the key in the SDL Keycode
+    /*Later there will be a class for storing and Handling all Mouse Inputs*/
+    std::map<int,bool> keyboard;
+    // Mouse Inputs currently are only the position of the mouse
+    /*Later there will be a class for storing and Handling all Mouse Inputs*/
+    EGL_Vector mouse;
+
+    private:
+    SDL_Event event;
+
+    SDL_Window* SDL_win;
+        EGL_Color clear_col = EGL_Color(0,0,0,1);
+    SDL_GLContext gl_cont;
+
+    bool quit = 0;
 };
 
 // Low Level Graphics
 class EGL_Mesh{
     public:
-    EGL_Mesh(EGL_Vertex* points, uint8_t num_points = 3);
+    EGL_Mesh(EGL_Vertex* points, uint8_t num_points);
     EGL_Mesh(){
 
     }
     ~EGL_Mesh();
 
     void Draw();
+    void Draw(float x,float y,float z);
+
     void Change(EGL_Vertex* points, uint8_t size);
+    void Change();
+
+    void UpdateVertexPosition(EGL_Vector pos);
+
+    EGL_Vector pos;
+
+    protected:
+    void Init_Mesh(EGL_Vertex* verticies, uint8_t num_points);
 
     enum
     {
@@ -138,12 +163,13 @@ class EGL_Mesh{
         NUM_BUFFERS
     };
 
-    //private:
     GLuint vertex_array_obj;
     GLuint vertex_array_buffers[NUM_BUFFERS];
     uint8_t draw_count;
+    EGL_Vertex* verticies;
 
 };
+
 class EGL_Shader{
     public:
     EGL_Shader(const std::string& file_name);
@@ -158,26 +184,25 @@ class EGL_Shader{
 };
 
 // Top Level Graphics
-class EGL_Poly{
+class EGL_Poly : public EGL_Mesh{
     public:
-    EGL_Poly(std::vector<EGL_Point> points);
+    EGL_Poly(std::vector<EGL_Point>* points);
     EGL_Poly(){
 
     }
 
-    void Draw();
-    void Draw(int x,int y,int z);
-    void Change(std::vector<EGL_Point> points);
-    void Change();
+    ~EGL_Poly(){
+
+    }
+
     void Rotate(float x,float y,float z);
-    
-    EGL_Vector pos;
+
+    protected:
+    void Init_Poly(std::vector<EGL_Point>* points);
+    std::vector<EGL_Point> points;
 
     private:
-    void ChangeVerts();
-
-    std::vector<EGL_Point> points;
-    EGL_Mesh* mesh;
+    EGL_Vertex* GetVerticiesVector();
 };
 
 
@@ -202,39 +227,45 @@ class EGL_Poly{
 
 // Top Level Physics Engine
 // Should only need to tell every Physics Object to Check for Collisions with Objects nearby
+
 class EGL_Physics{
 
 };
 
-class EGL_Hitbox{
+class EGL_Hitbox : public EGL_Poly{
     public:
-    EGL_Hitbox(std::vector<EGL_Vector> points);
-    EGL_Hitbox(std::vector<EGL_Point> points);
+    EGL_Hitbox(std::vector<EGL_Point>* points);
     EGL_Hitbox(){
 
     }
-    
-    std::vector<EGL_Vector> points;
-    EGL_Vector pos;
-    EGL_Hitbox* other;
-    std::vector<EGL_Vector> hits;
 
+    struct HitInfo{
+        HitInfo(EGL_Hitbox* other,std::vector<EGL_Vector> hit_points){
+            this->hit_points = hit_points;
+            this->other = other;
+        }
+        std::vector<EGL_Vector> hit_points ;
+        EGL_Hitbox* other;
+    };
+
+    bool CheckLineIntersect(EGL_Vector q1,EGL_Vector q2, EGL_Vector p1);
+    bool PointInOther(EGL_Point point,EGL_Hitbox* other);
     void CheckCollision(EGL_Hitbox* other);
-    void UpdateHitbox(std::vector<EGL_Point> points);
+    void UpdateHitbox(std::vector<EGL_Point>* points);
+    void ClearHits();
+
+    std::vector<HitInfo> hits;
 };
 
 class EGL_PhysicsObject : public EGL_Poly{
     public:
-    EGL_PhysicsObject(std::vector<EGL_Point> points);
-
-    std::vector<EGL_Point> points;
-    EGL_Hitbox box;
+    EGL_PhysicsObject(std::vector<EGL_Point>* points);
 
     void Update();
 };
 
 //EGL Helper Functions
-EGL_Vertex EGL_ClampCoords(float x,float y,float z);
+EGL_Vector EGL_UnclampCoordinates(EGL_Vertex vertex);
+EGL_Vertex EGL_ClampCoordinates(float x,float y,float z);
 EGL_Vector ToVector(EGL_Point point);
-
 #endif

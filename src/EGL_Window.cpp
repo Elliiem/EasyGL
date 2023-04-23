@@ -34,6 +34,9 @@ EGL_Window::~EGL_Window()
     SDL_Quit();
 }
 
+bool EGL_Window::ShouldQuit(){
+    return quit;
+}
 
 void EGL_Window::SwapBuffers()
 {
@@ -65,6 +68,8 @@ void EGL_Window::Update()
     if(keyboard[SDLK_z] && keyboard[SDLK_LCTRL]){
         quit = true;
     }
+
+    Clear();
 }
 
 

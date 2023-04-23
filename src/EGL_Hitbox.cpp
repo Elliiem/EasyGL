@@ -9,8 +9,14 @@ float Cross2d(EGL_Vector v1, EGL_Vector v2){
     return v1.x*v2.y - v1.y*v2.x;
 }
 
+
+
+EGL_Hitbox::EGL_Hitbox(std::vector<EGL_Point>* points){
+    Init_Poly(points);
+}
+
 // Checks if the line from p1 to the largest x intersects the q1q2 Vector 
-bool CheckLineIntersect(EGL_Vector q1,EGL_Vector q2, EGL_Vector p1){
+bool EGL_Hitbox::CheckLineIntersect(EGL_Vector q1,EGL_Vector q2, EGL_Vector p1){
     // Find the point p2
     EGL_Vector p2 = p1;
     // Check if q1 or q2 have a larger x, and set p2's x to one larger
@@ -20,11 +26,17 @@ bool CheckLineIntersect(EGL_Vector q1,EGL_Vector q2, EGL_Vector p1){
         p2.x = q2.x + 1;
     }
 
+    if(q1.z != p1.z){
+        if(q1.z<p1.z-0.1 || q1.z>p1.z+0.1){
+            return false;
+        }
+    }
+
     // Calculate the Vectors between p1 and p2, and q1 and q2
     EGL_Vector s = q2 - q1;
     EGL_Vector r = p2 - p1;
 
-    // Get the cross product of r and s this
+    // Get the cross product of r and s
     // is the result 0, then the vectors are parralel
     float rs = Cross2d(r,s);
     // Now get the multipliers that get to the cutting point
@@ -46,69 +58,39 @@ bool CheckLineIntersect(EGL_Vector q1,EGL_Vector q2, EGL_Vector p1){
     }
 }
 
-// Checks if a given point is inside the bounds of the Hitbox, other
-bool CheckIfInPoly(EGL_Vector point, EGL_Hitbox* checking, EGL_Hitbox* other){
-    int count = 0; //number of intersections
 
-    // Go through every line on the polygon ...
-    for(int i=0;i<other->points.size()-1;i++){
-        // ... and Check if the points line intersects 
-        if(CheckLineIntersect(other->points.at(i)+other->pos,other->points.at(i+1)+other->pos,point+checking->pos)){
-            // if so iterate count
-            count++;
+bool EGL_Hitbox::PointInOther(EGL_Point point,EGL_Hitbox* other){
+    int intersections = 0;
+    for(int i=0;i<(other->points.size()-1);i++){
+        if(CheckLineIntersect(ToVector(other->points.at(i))+other->pos,ToVector(other->points.at(i+1))+other->pos,ToVector(point)+pos)){
+            intersections++;
         };
     }
-    // and do the same to the line between the last and first point
-    if(CheckLineIntersect(other->points.at(0)+other->pos,other->points.back()+other->pos,point+checking->pos)){
-        count++;
-    }
 
-    // Check if count is even or odd
-    // Return true if odd, else false
-    if(count%2!=0){
+    if(CheckLineIntersect(ToVector(other->points.at(0))+other->pos,ToVector(other->points.back())+other->pos,ToVector(point)+pos)){
+        intersections++;
+    };
+
+    if(intersections%2 != 0){
         return true;
     } else {
         return false;
     }
 }
 
-
-EGL_Hitbox::EGL_Hitbox(std::vector<EGL_Vector> points){
-    this->points = points;
-}
-
-EGL_Hitbox::EGL_Hitbox(std::vector<EGL_Point> points){
-    std::vector<EGL_Vector> vector;
-
-    for(int i=0;i<points.size();i++){
-        vector.push_back(ToVector(points.at(i)));
-    }
-
-    this->points = vector;
-}
-
-
 void EGL_Hitbox::CheckCollision(EGL_Hitbox* other){
-    std::vector<EGL_Vector> hits;
-
+    std::vector<EGL_Vector> point_hits;
     for(int i=0;i<points.size();i++){
-        if(CheckIfInPoly(points.at(i),this,other)){
-            hits.push_back(points.at(i)+pos);
+        if(PointInOther(points.at(i),other)){
+            point_hits.push_back(ToVector(points.at(i))+pos);
         }
     }
-
-    this->hits = hits;
-    if(hits.size() == 0){
-        this->other = other;
+    if(point_hits.size() != 0){
+        hits.push_back(HitInfo(other,point_hits));
     }
 }
 
-void EGL_Hitbox::UpdateHitbox(std::vector<EGL_Point> points){
-    std::vector<EGL_Vector> vector;
-
-    for(int i=0;i<points.size();i++){
-        vector.push_back(ToVector(points.at(i)));
-    }
-
-    this->points = vector;
+void EGL_Hitbox::ClearHits(){
+    hits.clear();
+    hits.shrink_to_fit();
 }
