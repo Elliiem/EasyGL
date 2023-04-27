@@ -58,17 +58,6 @@ void EGL_Mesh::Draw(){
     glBindVertexArray(0);
 }
 
-void EGL_Mesh::Draw(float x,float y,float z){
-    UpdateVertexPosition(EGL_Vector(x,y,z));
-    pos = EGL_Vector(x,y,z);
-    Change(verticies,draw_count);
-
-    glBindVertexArray(vertex_array_obj);
-    glDrawArrays(GL_POLYGON,0,draw_count);
-    glBindVertexArray(0);
-}
-
-
 void EGL_Mesh::Change(EGL_Vertex* verticies, uint8_t size)
 {
     this->verticies = verticies;
@@ -84,4 +73,11 @@ void EGL_Mesh::Change(){
     glBindBuffer(GL_ARRAY_BUFFER,vertex_array_buffers[POSITION_VB]);
     glBufferData(GL_ARRAY_BUFFER,draw_count*sizeof(*verticies),verticies,GL_STATIC_DRAW);
     glBindVertexArray(0);    
+}
+
+void EGL_Mesh::SetPos(float x,float y,float z){
+    EGL_Vector tmp(x,y,z);
+    UpdateVertexPosition(tmp);
+    pos = tmp;
+    Change();
 }

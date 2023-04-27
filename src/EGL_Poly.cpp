@@ -21,8 +21,3 @@ void EGL_Poly::Rotate(float x,float y,float z){
     }
     Change(GetVerticiesVector(),draw_count);
 }
-
-void EGL_Poly::Init_Poly(std::vector<EGL_Point>* points){
-    this->points = *points;
-    Init_Mesh(GetVerticiesVector(),points->size());  
-}

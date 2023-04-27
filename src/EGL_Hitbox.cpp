@@ -11,8 +11,8 @@ float Cross2d(EGL_Vector v1, EGL_Vector v2){
 
 
 
-EGL_Hitbox::EGL_Hitbox(std::vector<EGL_Point>* points){
-    Init_Poly(points);
+EGL_Hitbox::EGL_Hitbox(std::vector<EGL_Point>* points) : EGL_Poly(points){
+    
 }
 
 // Checks if the line from p1 to the largest x intersects the q1q2 Vector 
