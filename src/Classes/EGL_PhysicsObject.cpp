@@ -1,4 +1,5 @@
-#include "EGL.h"
+#include "EGL_Graphics.h"
+#include "EGL_Physics.h"
 
 EGL_PhysicsObject::EGL_PhysicsObject(std::vector<EGL_Point>* points) : EGL_Poly(points){
     box = new EGL_Hitbox(points);

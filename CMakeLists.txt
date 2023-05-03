@@ -19,20 +19,23 @@ include_directories(${SDL2_INCLUDE_DIRS})
 
 add_executable(EGL
 main.cpp 
-src/EGL_Window.cpp
-src/EGL_Mesh.cpp
-src/EGL_Shader.cpp
+src/Classes/EGL_Window.cpp
+src/Classes/EGL_Mesh.cpp
+src/Classes/EGL_Shader.cpp
 src/EGL_Func.cpp
-src/EGL_Poly.cpp
-src/EGL_Point.cpp
-src/EGL_Hitbox.cpp
-src/EGL_PhysicsObject.cpp
+src/Classes/EGL_Poly.cpp
+src/Structs/EGL_Point.cpp
+src/Classes/EGL_Hitbox.cpp
+src/Classes/EGL_PhysicsObject.cpp
+src/Structs/EGL_Vector.cpp
 stb/stb_image.c
 )
 
 target_include_directories(EGL PUBLIC  
 ./stb
 ./include
+./include/Classes
+./include/Structs
 )
 
 target_link_libraries(EGL

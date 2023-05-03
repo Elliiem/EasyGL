@@ -52,65 +52,72 @@ build cmake_object_order_depends_target_EGL: phony || CMakeFiles/EGL.dir
 build CMakeFiles/EGL.dir/main.cpp.o: CXX_COMPILER__EGL_Debug /home/elliem/cpp/EGL/main.cpp || cmake_object_order_depends_target_EGL
   DEP_FILE = CMakeFiles/EGL.dir/main.cpp.o.d
   FLAGS = -g -std=gnu++17
-  INCLUDES = -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/./stb -I/home/elliem/cpp/EGL/./include
+  INCLUDES = -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/./stb -I/home/elliem/cpp/EGL/./include -I/home/elliem/cpp/EGL/./include/Classes -I/home/elliem/cpp/EGL/./include/Structs
   OBJECT_DIR = CMakeFiles/EGL.dir
   OBJECT_FILE_DIR = CMakeFiles/EGL.dir
 
-build CMakeFiles/EGL.dir/src/EGL_Window.cpp.o: CXX_COMPILER__EGL_Debug /home/elliem/cpp/EGL/src/EGL_Window.cpp || cmake_object_order_depends_target_EGL
-  DEP_FILE = CMakeFiles/EGL.dir/src/EGL_Window.cpp.o.d
+build CMakeFiles/EGL.dir/src/Classes/EGL_Window.cpp.o: CXX_COMPILER__EGL_Debug /home/elliem/cpp/EGL/src/Classes/EGL_Window.cpp || cmake_object_order_depends_target_EGL
+  DEP_FILE = CMakeFiles/EGL.dir/src/Classes/EGL_Window.cpp.o.d
   FLAGS = -g -std=gnu++17
-  INCLUDES = -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/./stb -I/home/elliem/cpp/EGL/./include
+  INCLUDES = -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/./stb -I/home/elliem/cpp/EGL/./include -I/home/elliem/cpp/EGL/./include/Classes -I/home/elliem/cpp/EGL/./include/Structs
   OBJECT_DIR = CMakeFiles/EGL.dir
-  OBJECT_FILE_DIR = CMakeFiles/EGL.dir/src
+  OBJECT_FILE_DIR = CMakeFiles/EGL.dir/src/Classes
 
-build CMakeFiles/EGL.dir/src/EGL_Mesh.cpp.o: CXX_COMPILER__EGL_Debug /home/elliem/cpp/EGL/src/EGL_Mesh.cpp || cmake_object_order_depends_target_EGL
-  DEP_FILE = CMakeFiles/EGL.dir/src/EGL_Mesh.cpp.o.d
+build CMakeFiles/EGL.dir/src/Classes/EGL_Mesh.cpp.o: CXX_COMPILER__EGL_Debug /home/elliem/cpp/EGL/src/Classes/EGL_Mesh.cpp || cmake_object_order_depends_target_EGL
+  DEP_FILE = CMakeFiles/EGL.dir/src/Classes/EGL_Mesh.cpp.o.d
   FLAGS = -g -std=gnu++17
-  INCLUDES = -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/./stb -I/home/elliem/cpp/EGL/./include
+  INCLUDES = -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/./stb -I/home/elliem/cpp/EGL/./include -I/home/elliem/cpp/EGL/./include/Classes -I/home/elliem/cpp/EGL/./include/Structs
   OBJECT_DIR = CMakeFiles/EGL.dir
-  OBJECT_FILE_DIR = CMakeFiles/EGL.dir/src
+  OBJECT_FILE_DIR = CMakeFiles/EGL.dir/src/Classes
 
-build CMakeFiles/EGL.dir/src/EGL_Shader.cpp.o: CXX_COMPILER__EGL_Debug /home/elliem/cpp/EGL/src/EGL_Shader.cpp || cmake_object_order_depends_target_EGL
-  DEP_FILE = CMakeFiles/EGL.dir/src/EGL_Shader.cpp.o.d
+build CMakeFiles/EGL.dir/src/Classes/EGL_Shader.cpp.o: CXX_COMPILER__EGL_Debug /home/elliem/cpp/EGL/src/Classes/EGL_Shader.cpp || cmake_object_order_depends_target_EGL
+  DEP_FILE = CMakeFiles/EGL.dir/src/Classes/EGL_Shader.cpp.o.d
   FLAGS = -g -std=gnu++17
-  INCLUDES = -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/./stb -I/home/elliem/cpp/EGL/./include
+  INCLUDES = -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/./stb -I/home/elliem/cpp/EGL/./include -I/home/elliem/cpp/EGL/./include/Classes -I/home/elliem/cpp/EGL/./include/Structs
   OBJECT_DIR = CMakeFiles/EGL.dir
-  OBJECT_FILE_DIR = CMakeFiles/EGL.dir/src
+  OBJECT_FILE_DIR = CMakeFiles/EGL.dir/src/Classes
 
 build CMakeFiles/EGL.dir/src/EGL_Func.cpp.o: CXX_COMPILER__EGL_Debug /home/elliem/cpp/EGL/src/EGL_Func.cpp || cmake_object_order_depends_target_EGL
   DEP_FILE = CMakeFiles/EGL.dir/src/EGL_Func.cpp.o.d
   FLAGS = -g -std=gnu++17
-  INCLUDES = -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/./stb -I/home/elliem/cpp/EGL/./include
+  INCLUDES = -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/./stb -I/home/elliem/cpp/EGL/./include -I/home/elliem/cpp/EGL/./include/Classes -I/home/elliem/cpp/EGL/./include/Structs
   OBJECT_DIR = CMakeFiles/EGL.dir
   OBJECT_FILE_DIR = CMakeFiles/EGL.dir/src
 
-build CMakeFiles/EGL.dir/src/EGL_Poly.cpp.o: CXX_COMPILER__EGL_Debug /home/elliem/cpp/EGL/src/EGL_Poly.cpp || cmake_object_order_depends_target_EGL
-  DEP_FILE = CMakeFiles/EGL.dir/src/EGL_Poly.cpp.o.d
+build CMakeFiles/EGL.dir/src/Classes/EGL_Poly.cpp.o: CXX_COMPILER__EGL_Debug /home/elliem/cpp/EGL/src/Classes/EGL_Poly.cpp || cmake_object_order_depends_target_EGL
+  DEP_FILE = CMakeFiles/EGL.dir/src/Classes/EGL_Poly.cpp.o.d
   FLAGS = -g -std=gnu++17
-  INCLUDES = -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/./stb -I/home/elliem/cpp/EGL/./include
+  INCLUDES = -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/./stb -I/home/elliem/cpp/EGL/./include -I/home/elliem/cpp/EGL/./include/Classes -I/home/elliem/cpp/EGL/./include/Structs
   OBJECT_DIR = CMakeFiles/EGL.dir
-  OBJECT_FILE_DIR = CMakeFiles/EGL.dir/src
+  OBJECT_FILE_DIR = CMakeFiles/EGL.dir/src/Classes
 
-build CMakeFiles/EGL.dir/src/EGL_Point.cpp.o: CXX_COMPILER__EGL_Debug /home/elliem/cpp/EGL/src/EGL_Point.cpp || cmake_object_order_depends_target_EGL
-  DEP_FILE = CMakeFiles/EGL.dir/src/EGL_Point.cpp.o.d
+build CMakeFiles/EGL.dir/src/Structs/EGL_Point.cpp.o: CXX_COMPILER__EGL_Debug /home/elliem/cpp/EGL/src/Structs/EGL_Point.cpp || cmake_object_order_depends_target_EGL
+  DEP_FILE = CMakeFiles/EGL.dir/src/Structs/EGL_Point.cpp.o.d
   FLAGS = -g -std=gnu++17
-  INCLUDES = -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/./stb -I/home/elliem/cpp/EGL/./include
+  INCLUDES = -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/./stb -I/home/elliem/cpp/EGL/./include -I/home/elliem/cpp/EGL/./include/Classes -I/home/elliem/cpp/EGL/./include/Structs
   OBJECT_DIR = CMakeFiles/EGL.dir
-  OBJECT_FILE_DIR = CMakeFiles/EGL.dir/src
+  OBJECT_FILE_DIR = CMakeFiles/EGL.dir/src/Structs
 
-build CMakeFiles/EGL.dir/src/EGL_Hitbox.cpp.o: CXX_COMPILER__EGL_Debug /home/elliem/cpp/EGL/src/EGL_Hitbox.cpp || cmake_object_order_depends_target_EGL
-  DEP_FILE = CMakeFiles/EGL.dir/src/EGL_Hitbox.cpp.o.d
+build CMakeFiles/EGL.dir/src/Classes/EGL_Hitbox.cpp.o: CXX_COMPILER__EGL_Debug /home/elliem/cpp/EGL/src/Classes/EGL_Hitbox.cpp || cmake_object_order_depends_target_EGL
+  DEP_FILE = CMakeFiles/EGL.dir/src/Classes/EGL_Hitbox.cpp.o.d
   FLAGS = -g -std=gnu++17
-  INCLUDES = -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/./stb -I/home/elliem/cpp/EGL/./include
+  INCLUDES = -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/./stb -I/home/elliem/cpp/EGL/./include -I/home/elliem/cpp/EGL/./include/Classes -I/home/elliem/cpp/EGL/./include/Structs
   OBJECT_DIR = CMakeFiles/EGL.dir
-  OBJECT_FILE_DIR = CMakeFiles/EGL.dir/src
+  OBJECT_FILE_DIR = CMakeFiles/EGL.dir/src/Classes
 
-build CMakeFiles/EGL.dir/src/EGL_PhysicsObject.cpp.o: CXX_COMPILER__EGL_Debug /home/elliem/cpp/EGL/src/EGL_PhysicsObject.cpp || cmake_object_order_depends_target_EGL
-  DEP_FILE = CMakeFiles/EGL.dir/src/EGL_PhysicsObject.cpp.o.d
+build CMakeFiles/EGL.dir/src/Classes/EGL_PhysicsObject.cpp.o: CXX_COMPILER__EGL_Debug /home/elliem/cpp/EGL/src/Classes/EGL_PhysicsObject.cpp || cmake_object_order_depends_target_EGL
+  DEP_FILE = CMakeFiles/EGL.dir/src/Classes/EGL_PhysicsObject.cpp.o.d
   FLAGS = -g -std=gnu++17
-  INCLUDES = -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/./stb -I/home/elliem/cpp/EGL/./include
+  INCLUDES = -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/./stb -I/home/elliem/cpp/EGL/./include -I/home/elliem/cpp/EGL/./include/Classes -I/home/elliem/cpp/EGL/./include/Structs
   OBJECT_DIR = CMakeFiles/EGL.dir
-  OBJECT_FILE_DIR = CMakeFiles/EGL.dir/src
+  OBJECT_FILE_DIR = CMakeFiles/EGL.dir/src/Classes
+
+build CMakeFiles/EGL.dir/src/Structs/EGL_Vector.cpp.o: CXX_COMPILER__EGL_Debug /home/elliem/cpp/EGL/src/Structs/EGL_Vector.cpp || cmake_object_order_depends_target_EGL
+  DEP_FILE = CMakeFiles/EGL.dir/src/Structs/EGL_Vector.cpp.o.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/./stb -I/home/elliem/cpp/EGL/./include -I/home/elliem/cpp/EGL/./include/Classes -I/home/elliem/cpp/EGL/./include/Structs
+  OBJECT_DIR = CMakeFiles/EGL.dir
+  OBJECT_FILE_DIR = CMakeFiles/EGL.dir/src/Structs
 
 
 # =============================================================================
@@ -120,7 +127,7 @@ build CMakeFiles/EGL.dir/src/EGL_PhysicsObject.cpp.o: CXX_COMPILER__EGL_Debug /h
 #############################################
 # Link the executable EGL
 
-build EGL: CXX_EXECUTABLE_LINKER__EGL_Debug CMakeFiles/EGL.dir/main.cpp.o CMakeFiles/EGL.dir/src/EGL_Window.cpp.o CMakeFiles/EGL.dir/src/EGL_Mesh.cpp.o CMakeFiles/EGL.dir/src/EGL_Shader.cpp.o CMakeFiles/EGL.dir/src/EGL_Func.cpp.o CMakeFiles/EGL.dir/src/EGL_Poly.cpp.o CMakeFiles/EGL.dir/src/EGL_Point.cpp.o CMakeFiles/EGL.dir/src/EGL_Hitbox.cpp.o CMakeFiles/EGL.dir/src/EGL_PhysicsObject.cpp.o
+build EGL: CXX_EXECUTABLE_LINKER__EGL_Debug CMakeFiles/EGL.dir/main.cpp.o CMakeFiles/EGL.dir/src/Classes/EGL_Window.cpp.o CMakeFiles/EGL.dir/src/Classes/EGL_Mesh.cpp.o CMakeFiles/EGL.dir/src/Classes/EGL_Shader.cpp.o CMakeFiles/EGL.dir/src/EGL_Func.cpp.o CMakeFiles/EGL.dir/src/Classes/EGL_Poly.cpp.o CMakeFiles/EGL.dir/src/Structs/EGL_Point.cpp.o CMakeFiles/EGL.dir/src/Classes/EGL_Hitbox.cpp.o CMakeFiles/EGL.dir/src/Classes/EGL_PhysicsObject.cpp.o CMakeFiles/EGL.dir/src/Structs/EGL_Vector.cpp.o
   FLAGS = -g
   LINK_LIBRARIES = -lfmt  -lOpenGL  -lGLEW  -lSDL2
   OBJECT_DIR = CMakeFiles/EGL.dir

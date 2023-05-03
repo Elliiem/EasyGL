@@ -1,4 +1,5 @@
 #include "EGL.h"
+
 int EGL_WIN_HEIGHT;
 int EGL_WIN_WIDTH;
 

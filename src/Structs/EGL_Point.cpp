@@ -1,4 +1,4 @@
-#include "EGL.h"
+#include "EGL_Structs.h"
 
 //Helpers
 float Rad(float deg){
