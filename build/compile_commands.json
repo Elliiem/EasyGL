@@ -48,5 +48,10 @@
   "directory": "/home/elliem/cpp/EGL/build",
   "command": "/usr/bin/g++ -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/./stb -I/home/elliem/cpp/EGL/./include -I/home/elliem/cpp/EGL/./include/Classes -I/home/elliem/cpp/EGL/./include/Structs -g -std=gnu++17 -o CMakeFiles/EGL.dir/src/Structs/EGL_Vector.cpp.o -c /home/elliem/cpp/EGL/src/Structs/EGL_Vector.cpp",
   "file": "/home/elliem/cpp/EGL/src/Structs/EGL_Vector.cpp"
+},
+{
+  "directory": "/home/elliem/cpp/EGL/build",
+  "command": "/usr/bin/g++ -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/./stb -I/home/elliem/cpp/EGL/./include -I/home/elliem/cpp/EGL/./include/Classes -I/home/elliem/cpp/EGL/./include/Structs -g -std=gnu++17 -o CMakeFiles/EGL.dir/src/Classes/EGL_Input.cpp.o -c /home/elliem/cpp/EGL/src/Classes/EGL_Input.cpp",
+  "file": "/home/elliem/cpp/EGL/src/Classes/EGL_Input.cpp"
 }
 ]

@@ -119,6 +119,13 @@ build CMakeFiles/EGL.dir/src/Structs/EGL_Vector.cpp.o: CXX_COMPILER__EGL_Debug /
   OBJECT_DIR = CMakeFiles/EGL.dir
   OBJECT_FILE_DIR = CMakeFiles/EGL.dir/src/Structs
 
+build CMakeFiles/EGL.dir/src/Classes/EGL_Input.cpp.o: CXX_COMPILER__EGL_Debug /home/elliem/cpp/EGL/src/Classes/EGL_Input.cpp || cmake_object_order_depends_target_EGL
+  DEP_FILE = CMakeFiles/EGL.dir/src/Classes/EGL_Input.cpp.o.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I/usr/include/SDL2 -I/home/elliem/cpp/EGL/./stb -I/home/elliem/cpp/EGL/./include -I/home/elliem/cpp/EGL/./include/Classes -I/home/elliem/cpp/EGL/./include/Structs
+  OBJECT_DIR = CMakeFiles/EGL.dir
+  OBJECT_FILE_DIR = CMakeFiles/EGL.dir/src/Classes
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target EGL
@@ -127,7 +134,7 @@ build CMakeFiles/EGL.dir/src/Structs/EGL_Vector.cpp.o: CXX_COMPILER__EGL_Debug /
 #############################################
 # Link the executable EGL
 
-build EGL: CXX_EXECUTABLE_LINKER__EGL_Debug CMakeFiles/EGL.dir/main.cpp.o CMakeFiles/EGL.dir/src/Classes/EGL_Window.cpp.o CMakeFiles/EGL.dir/src/Classes/EGL_Mesh.cpp.o CMakeFiles/EGL.dir/src/Classes/EGL_Shader.cpp.o CMakeFiles/EGL.dir/src/EGL_Func.cpp.o CMakeFiles/EGL.dir/src/Classes/EGL_Poly.cpp.o CMakeFiles/EGL.dir/src/Structs/EGL_Point.cpp.o CMakeFiles/EGL.dir/src/Classes/EGL_Hitbox.cpp.o CMakeFiles/EGL.dir/src/Classes/EGL_PhysicsObject.cpp.o CMakeFiles/EGL.dir/src/Structs/EGL_Vector.cpp.o
+build EGL: CXX_EXECUTABLE_LINKER__EGL_Debug CMakeFiles/EGL.dir/main.cpp.o CMakeFiles/EGL.dir/src/Classes/EGL_Window.cpp.o CMakeFiles/EGL.dir/src/Classes/EGL_Mesh.cpp.o CMakeFiles/EGL.dir/src/Classes/EGL_Shader.cpp.o CMakeFiles/EGL.dir/src/EGL_Func.cpp.o CMakeFiles/EGL.dir/src/Classes/EGL_Poly.cpp.o CMakeFiles/EGL.dir/src/Structs/EGL_Point.cpp.o CMakeFiles/EGL.dir/src/Classes/EGL_Hitbox.cpp.o CMakeFiles/EGL.dir/src/Classes/EGL_PhysicsObject.cpp.o CMakeFiles/EGL.dir/src/Structs/EGL_Vector.cpp.o CMakeFiles/EGL.dir/src/Classes/EGL_Input.cpp.o
   FLAGS = -g
   LINK_LIBRARIES = -lfmt  -lOpenGL  -lGLEW  -lSDL2
   OBJECT_DIR = CMakeFiles/EGL.dir

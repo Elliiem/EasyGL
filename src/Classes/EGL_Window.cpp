@@ -26,6 +26,8 @@ EGL_Window::EGL_Window(int width, int height, std::string name)
         std::cerr << "Glew failed to Init" << std::endl;
     }
 
+    SDL_GL_SetSwapInterval(0);
+    input = EGL_Input(&event);
 }
 
 EGL_Window::~EGL_Window()
@@ -66,7 +68,7 @@ void EGL_Window::Update()
     SwapBuffers();
     HandleEvents();
 
-    if(keyboard[SDLK_z] && keyboard[SDLK_LCTRL]){
+    if(input.keyboard[SDLK_z] && input.keyboard[SDLK_LCTRL]){
         quit = true;
     }
 
@@ -76,45 +78,12 @@ void EGL_Window::Update()
 
 void EGL_Window::HandleEvents()
 {
-    while (SDL_PollEvent(&event))
-    {
-        switch(event.type)
-        {
-            case(SDL_QUIT):
+    while (SDL_PollEvent(&event)){
+        switch(event.type){
+            case SDL_QUIT:
                 quit = 1;
             break;
         }
-        HandleKey();
-        HandleMouse();
-    }
-}
-
-void EGL_Window::HandleMouse(){
-    switch(event.type){
-        case(SDL_MOUSEMOTION):
-            mouse.x = event.motion.x;
-            mouse.y = event.motion.y;
-        break;
-    }
-}
-
-void EGL_Window::HandleKey(){
-    switch(event.type){
-        case(SDL_KEYUP):    
-            try{
-                keyboard.at(event.key.keysym.sym) = false;
-            }
-            catch (const std::exception&){
-                keyboard.insert({event.key.keysym.sym,false});
-            }
-        break;
-        case(SDL_KEYDOWN):
-            try{
-                keyboard.at(event.key.keysym.sym) = true;
-            }
-            catch (const std::exception&){
-                keyboard.insert({event.key.keysym.sym,true});
-            }
-        break;
+        input.Handle();
     }
 }
