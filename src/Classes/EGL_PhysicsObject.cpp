@@ -24,3 +24,14 @@ void EGL_PhysicsObject::SetPos(float x,float y,float z){
     EGL_Mesh::SetPos(x,y,z);
     box->SetPos(x,y,z);
 }
+
+void EGL_PhysicsObject::Update(){
+    vel += acc;
+    pos += vel;
+    Rotate(rot_vel.x,rot_vel.y,rot_vel.z);
+    Draw();
+}
+
+void HandleCollision(const EGL_Hitbox& other){
+    
+}

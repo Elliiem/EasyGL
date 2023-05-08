@@ -1,6 +1,8 @@
 #ifndef EGL_VECTOR
 #define EGL_VECTOR
 
+#include <cmath>
+
 // Mathematical Vector
 struct EGL_Vector{
     EGL_Vector(float x,float y,float z);
@@ -8,6 +10,18 @@ struct EGL_Vector{
 
 
     float x,y,z;
+
+    // returns the lenght of this Vector
+    float Len();
+
+    // returns the degree between this Vector and the given Vector
+    float DegreeBetween(EGL_Vector& other);
+
+    // returns the projection on another Vector
+    float Projection(EGL_Vector& other);
+
+    // returns the Unit Vector of this Vector
+    EGL_Vector Unit();
 
     // returns the Cross product of this and other
     EGL_Vector Cross(const EGL_Vector& other);
@@ -38,5 +52,15 @@ struct EGL_Vector{
 
     // Multiplies x,y and z by the given number
     void operator*=(float mult);
+
+    // Divides x,y and z by the given number and returns a new 
+    // Vector with the reslts
+    EGL_Vector operator/(float div);
+
+    // Divides x,y and z by the given number
+    void operator/=(float div);
+
+    // Compares this Vector to the given one
+    bool operator==(const EGL_Vector& other);
 };
 #endif

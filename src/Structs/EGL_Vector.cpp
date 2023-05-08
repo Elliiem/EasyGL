@@ -1,4 +1,5 @@
 #include "EGL_Vector.h"
+#include <fmt/format.h>
 
 EGL_Vector::EGL_Vector(float x,float y,float z){
     this->x = x;
@@ -18,6 +19,22 @@ EGL_Vector EGL_Vector::Cross(const EGL_Vector& other){
 
 float EGL_Vector::Cross2d(const EGL_Vector& other){
     return x*other.y - y*other.x;
+}
+
+float EGL_Vector::Len(){
+    return sqrt(pow(x,2)+pow(y,2)+pow(z,2));
+}
+
+float EGL_Vector::DegreeBetween(EGL_Vector& other){
+    return acos((*this*other) / (Len()*other.Len()))*57.29577951308232;
+}
+
+float EGL_Vector::Projection(EGL_Vector& other){
+    return (*this*other)/(other.Len());
+}
+
+EGL_Vector EGL_Vector::Unit(){
+    return *this/Len();
 }
 
 void EGL_Vector::operator+=(const EGL_Vector& other){
@@ -52,4 +69,22 @@ void EGL_Vector::operator*=(float mult){
     x *= mult;
     y *= mult;
     z *= mult;
+}
+
+EGL_Vector EGL_Vector::operator/(float div){
+    return EGL_Vector(x/div,y/div,z/div);
+}
+
+void EGL_Vector::operator/=(float div){
+    x /= div;
+    y /= div;
+    z /= div;
+}
+
+bool EGL_Vector::operator==(const EGL_Vector& other){
+    if(x == other.x && y == other.y && z == other.z){
+        return true;
+    } else {
+        return false;
+    }
 }

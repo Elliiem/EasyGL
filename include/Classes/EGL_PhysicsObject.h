@@ -9,7 +9,13 @@ class EGL_PhysicsObject : public EGL_Poly{
     ~EGL_PhysicsObject(){
         delete box;
     }
+
     EGL_Hitbox* box;
+
+    EGL_Vector vel;
+    EGL_Vector rot_vel;
+    EGL_Vector acc;
+
 
     void Draw();
     void Draw(float x, float y, float z);
@@ -17,6 +23,10 @@ class EGL_PhysicsObject : public EGL_Poly{
     void SetPos(float x,float y,float z);
     
     void Update();
+    
+    private:
+    void Deccelerate();
+    void HandleCollision(const EGL_Hitbox& other);
 };
 
 
