@@ -3,30 +3,28 @@
 
 #include "EGL_Hitbox.h"
 
-class EGL_PhysicsObject : public EGL_Poly{
+class EGL_Object : public EGL_Poly{
     public:
-    EGL_PhysicsObject(std::vector<EGL_Point>* points);
-    ~EGL_PhysicsObject(){
+    EGL_Object(std::vector<EGL_Point>* points);
+    ~EGL_Object(){
         delete box;
     }
 
     EGL_Hitbox* box;
 
-    EGL_Vector vel;
-    EGL_Vector rot_vel;
-    EGL_Vector acc;
 
-
+    // Drawing Stuff
     void Draw();
     void Draw(float x, float y, float z);
     void Rotate(float x,float y,float z);
     void SetPos(float x,float y,float z);
     
+
+    // Physics Stuff
     void Update();
-    
-    private:
-    void Deccelerate();
-    void HandleCollision(const EGL_Hitbox& other);
+
+    EGL_Vector last_pos;
+    EGL_Vector acceleration
 };
 
 

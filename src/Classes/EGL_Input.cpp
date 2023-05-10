@@ -4,7 +4,7 @@ EGL_Input::EGL_Input(SDL_Event* event){
     this->event = event;
 }
 
-void EGL_Input::Handle(){
+void EGL_Input::HandleInputs(){
     switch(event->type){
         case SDL_KEYDOWN:
             KeyDown();

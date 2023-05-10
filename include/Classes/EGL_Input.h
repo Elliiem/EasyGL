@@ -15,7 +15,7 @@ class EGL_Input{
     std::map<int,bool>keyboard;
     EGL_Vector mouse_pos;
 
-    void Handle();
+    void HandleInputs();
 
     private:
     SDL_Event* event;

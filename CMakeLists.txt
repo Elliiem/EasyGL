@@ -29,11 +29,9 @@ src/Classes/EGL_Hitbox.cpp
 src/Classes/EGL_PhysicsObject.cpp
 src/Structs/EGL_Vector.cpp
 src/Classes/EGL_Input.cpp
-stb/stb_image.c
 )
 
 target_include_directories(EGL PUBLIC  
-./stb
 ./include
 ./include/Classes
 ./include/Structs

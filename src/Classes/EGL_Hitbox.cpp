@@ -39,11 +39,12 @@ bool EGL_Hitbox::CheckLineIntersect(EGL_Vector q1,EGL_Vector q2, EGL_Vector p1){
 
     // Get the cross product of r and s
     // is the result 0, then the vectors are parralel
-    float rs = Cross2d(r,s);
+    float rs = EGL_Vector::Cross2d(r, s);
     // Now get the multipliers that get to the cutting point
     // are these more than 1 or less than 0 there is no intersection
-    float t = Cross2d((q1-p1),s)/rs;
-    float u = Cross2d((q1-p1),r)/rs;
+    float t = EGL_Vector::Cross2d(q1-p1, s)/rs;
+    float u = EGL_Vector::Cross2d(q1-p1, r)/rs;
+    
 
     // now just looking at the values will get the result 
     // is rs not 0 and t and u are between 0 and 1 we have an interception
@@ -51,47 +52,35 @@ bool EGL_Hitbox::CheckLineIntersect(EGL_Vector q1,EGL_Vector q2, EGL_Vector p1){
     if(rs != 0){
         if((0<=t && t<=1) && (0<=u && u<=1)){
             return true;
-        } else {
-            return false;
         }
-    } else {
-        return false;
     }
+
+    return false;
 }
 
-
-bool EGL_Hitbox::PointInOther(EGL_Point point,EGL_Hitbox* other){
-    int intersections = 0;
-    for(int i=0;i<(other->points.size()-1);i++){
-        if(CheckLineIntersect(ToVector(other->points.at(i))+other->pos,ToVector(other->points.at(i+1))+other->pos,ToVector(point)+pos)){
-            intersections++;
-        };
-    }
-
-    if(CheckLineIntersect(ToVector(other->points.at(0))+other->pos,ToVector(other->points.back())+other->pos,ToVector(point)+pos)){
-        intersections++;
-    };
-
-    if(intersections%2 != 0){
-        return true;
-    } else {
-        return false;
-    }
-}
-
-void EGL_Hitbox::CheckCollision(EGL_Hitbox* other){
+std::vector<EGL_Vector> EGL_Hitbox::CheckCollision(EGL_Hitbox* other){
     std::vector<EGL_Vector> point_hits;
-    for(int i=0;i<points.size();i++){
-        if(PointInOther(points.at(i),other)){
-            point_hits.push_back(ToVector(points.at(i))+pos);
-        }
-    }
-    if(point_hits.size() != 0){
-        hits.push_back(HitInfo(other,point_hits));
-    }
-}
+    int intersections = 0;
 
-void EGL_Hitbox::ClearHits(){
-    hits.clear();
-    hits.shrink_to_fit();
+    // Going over each point in this Hitbox
+    for(int ai=0; ai<points.size(); ai++){
+        for(int bi=0; bi<other->points.size();bi++){
+            if(bi == other->points.size() - 1){
+                if(CheckLineIntersect(ToVector(other->points.back())+other->pos, ToVector(other->points.at(0))+other->pos, ToVector(points.at(ai))+pos)){
+                    intersections++;
+                }                    
+            } else {
+                if(CheckLineIntersect(ToVector(other->points.at(bi))+other->pos, ToVector(other->points.at(bi+1))+other->pos, ToVector(points.at(ai))+pos)){
+                    intersections++;
+                }
+            }
+        }
+        if(intersections%2 != 0){
+            point_hits.push_back(ToVector(points.at(ai)));
+        }
+
+        intersections = 0;
+    }
+
+    return point_hits;
 }

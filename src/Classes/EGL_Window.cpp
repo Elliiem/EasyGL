@@ -2,6 +2,7 @@
 
 int EGL_WIN_HEIGHT;
 int EGL_WIN_WIDTH;
+float EGL_SWAP_INTERVAL = 0;
 
 EGL_Window::EGL_Window(int width, int height, std::string name)
 {
@@ -84,6 +85,6 @@ void EGL_Window::HandleEvents()
                 quit = 1;
             break;
         }
-        input.Handle();
+        input.HandleInputs();
     }
 }

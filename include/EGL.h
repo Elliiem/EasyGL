@@ -21,4 +21,5 @@
 // Globals
 extern int EGL_WIN_HEIGHT;
 extern int EGL_WIN_WIDTH;
+extern float EGL_SWAP_INTERVAL;
 #endif
