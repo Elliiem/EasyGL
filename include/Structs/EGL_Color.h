@@ -1,5 +1,4 @@
-#ifndef EGL_COLOR
-#define EGL_COLOR
+#pragma once
 
 // Holds RGBA
 struct EGL_Color{
@@ -19,4 +18,3 @@ struct EGL_Color{
     float b;
     float a;
 };
-#endif

@@ -1,5 +1,4 @@
-#ifndef EGL_VERTEX
-#define EGL_VERTEX
+#pragma once
 
 #include <glm/glm.hpp>
 
@@ -23,4 +22,3 @@ struct EGL_Vertex{
 
     glm::vec3 pos;
 };
-#endif

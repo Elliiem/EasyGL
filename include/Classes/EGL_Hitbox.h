@@ -1,11 +1,10 @@
 #pragma once
 
 #include "EGL_Point.h"
-#include "EGL_Poly.h"
-
+#include "EGL_Mesh.h"
 #include <vector>
 
-class EGL_Hitbox : public EGL_Poly{
+class EGL_Hitbox : public EGL_Mesh{
     public:
     EGL_Hitbox(std::vector<EGL_Point>* points);
     EGL_Hitbox(){

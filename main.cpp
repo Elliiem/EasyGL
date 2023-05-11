@@ -10,15 +10,12 @@ int main()
     std::vector<EGL_Point> box{EGL_Point(-50,-50,0),EGL_Point(-50,50,0),EGL_Point(50,50,0),EGL_Point(50,-50,0)};
     std::vector<EGL_Point> box_small{EGL_Point(-25,-25,0),EGL_Point(-25,25,0),EGL_Point(25,25,0),EGL_Point(25,-25,0)};
 
-    EGL_Hitbox foo(&box_small);
-    EGL_Hitbox bar(&box);
-    bar.SetPos(100,100,0);
+    EGL_Mesh foo(&box);
 
     while(!win.ShouldQuit())
     {
-        foo.SetPos(win.input.mouse_pos.x,win.input.mouse_pos.y,0);
         foo.Draw();
-        bar.Draw();
+        foo.SetPos(win.input.mouse_pos.x, win.input.mouse_pos.y, 0);
         win.Update();
     }
 

@@ -1,5 +1,4 @@
-#ifndef EGL
-#define EGL
+#pragma once
 
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
@@ -22,4 +21,3 @@
 extern int EGL_WIN_HEIGHT;
 extern int EGL_WIN_WIDTH;
 extern float EGL_SWAP_INTERVAL;
-#endif

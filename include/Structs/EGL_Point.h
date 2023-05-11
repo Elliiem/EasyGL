@@ -1,5 +1,7 @@
-#ifndef EGL_POINT
-#define EGL_POINT
+#pragma once
+ 
+#include "EGL_Vector.h"
+
 
 // Rotatable Point (around the origin)
 struct EGL_Point{
@@ -18,4 +20,3 @@ struct EGL_Point{
     void RotateX(float deg);
     void RotateY(float deg);
 };
-#endif

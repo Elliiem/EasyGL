@@ -1,5 +1,4 @@
-#ifndef EGL_INPUT
-#define EGL_INPUT
+#pragma once 
 
 #include "EGL_Vector.h"
 
@@ -24,7 +23,3 @@ class EGL_Input{
     void KeyDown();
     void MouseMovement();
 };
-
-
-
-#endif

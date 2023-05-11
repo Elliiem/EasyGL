@@ -1,5 +1,4 @@
-#ifndef EGL_VECTOR
-#define EGL_VECTOR
+#pragma once
 
 #include <cmath>
 #include <fmt/format.h>
@@ -68,4 +67,3 @@ struct EGL_Vector{
 
     EGL_Vector operator-() const;
 };
-#endif

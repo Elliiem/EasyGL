@@ -1,5 +1,4 @@
-#ifndef EGL_SHADER
-#define EGL_SHADER
+#pragma once
 
 #include <GL/glew.h>
 
@@ -17,4 +16,3 @@ class EGL_Shader{
     GLuint program;
     GLuint shaders[NUM_SHADERS];
 };
-#endif

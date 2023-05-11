@@ -23,12 +23,12 @@ src/Classes/EGL_Window.cpp
 src/Classes/EGL_Mesh.cpp
 src/Classes/EGL_Shader.cpp
 src/EGL_Func.cpp
-src/Classes/EGL_Poly.cpp
 src/Structs/EGL_Point.cpp
 src/Classes/EGL_Hitbox.cpp
-src/Classes/EGL_PhysicsObject.cpp
+src/Classes/EGL_Object.cpp
 src/Structs/EGL_Vector.cpp
 src/Classes/EGL_Input.cpp
+src/Classes/EGL_Physics.cpp
 )
 
 target_include_directories(EGL PUBLIC  

@@ -1,45 +1,42 @@
-#ifndef EGL_MESH
-#define EGL_MESH
+#pragma once
 
 #include "EGL_Vertex.h"
 #include "EGL_Vector.h"
 #include <GL/glew.h>
+#include <vector>
 
 class EGL_Mesh{
     public:
-    EGL_Mesh(EGL_Vertex* points, uint8_t num_points);
+    EGL_Mesh(std::vector<EGL_Point>* points);
     EGL_Mesh(){}
     ~EGL_Mesh();
 
-    
+    public:
     void Draw();
-
     void Change(EGL_Vertex* points, uint8_t size);
     void Change();
-
-    void UpdateVertexPosition(EGL_Vector pos);
-
     void SetPos(float x,float y,float z);
+    void SetPos(EGL_Vector pos);
+    void Rotate(float x,float y,float z);
     EGL_Vector GetPos();
 
-
     protected:
-    uint8_t draw_count;
     EGL_Vector pos;
-    
-    void Init_Mesh(EGL_Vertex* points, uint8_t num_points);
-    
+    std::vector<EGL_Point>* points;
+    private:
+    EGL_Vertex* verticies;
 
     private:
-    enum
-    {
-        POSITION_VB,
-        NUM_BUFFERS
-    };
+    EGL_Vertex* GetVerticiesVector();
+    void UpdateVertexPosition(EGL_Vector pos);
+    void ChangeVerticies();
+
+    private:
+    enum{POSITION_VB,NUM_BUFFERS};
 
     GLuint vertex_array_obj;
     GLuint vertex_array_buffers[NUM_BUFFERS];
-    EGL_Vertex* verticies;
 
+    protected:
+    uint8_t size;
 };
-#endif

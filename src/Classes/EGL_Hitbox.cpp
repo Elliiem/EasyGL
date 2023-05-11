@@ -12,7 +12,7 @@ float Cross2d(EGL_Vector v1, EGL_Vector v2){
 
 
 
-EGL_Hitbox::EGL_Hitbox(std::vector<EGL_Point>* points) : EGL_Poly(points){
+EGL_Hitbox::EGL_Hitbox(std::vector<EGL_Point>* points) : EGL_Mesh(points){
     
 }
 
@@ -63,20 +63,20 @@ std::vector<EGL_Vector> EGL_Hitbox::CheckCollision(EGL_Hitbox* other){
     int intersections = 0;
 
     // Going over each point in this Hitbox
-    for(int ai=0; ai<points.size(); ai++){
-        for(int bi=0; bi<other->points.size();bi++){
-            if(bi == other->points.size() - 1){
-                if(CheckLineIntersect(ToVector(other->points.back())+other->pos, ToVector(other->points.at(0))+other->pos, ToVector(points.at(ai))+pos)){
+    for(int ai=0; ai<points->size(); ai++){
+        for(int bi=0; bi<other->points->size();bi++){
+            if(bi == other->points->size() - 1){
+                if(CheckLineIntersect(ToVector(other->points->back())+other->pos, ToVector(other->points->at(0))+other->pos, ToVector(points->at(ai))+pos)){
                     intersections++;
                 }                    
             } else {
-                if(CheckLineIntersect(ToVector(other->points.at(bi))+other->pos, ToVector(other->points.at(bi+1))+other->pos, ToVector(points.at(ai))+pos)){
+                if(CheckLineIntersect(ToVector(other->points->at(bi))+other->pos, ToVector(other->points->at(bi+1))+other->pos, ToVector(points->at(ai))+pos)){
                     intersections++;
                 }
             }
         }
         if(intersections%2 != 0){
-            point_hits.push_back(ToVector(points.at(ai)));
+            point_hits.push_back(ToVector(points->at(ai)));
         }
 
         intersections = 0;

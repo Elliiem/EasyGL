@@ -1,5 +1,4 @@
-#ifndef EGL_WINDOW
-#define EGL_WINDOW
+#pragma once
 
 #include "EGL_Color.h"
 #include "EGL_Input.h"
@@ -38,4 +37,4 @@ class EGL_Window{
 
     void SwapBuffers();
 };
-#endif
+

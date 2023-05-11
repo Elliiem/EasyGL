@@ -1,8 +1,8 @@
 #include "EGL.h"
 
 EGL_Vertex EGL_ClampCoordinates(float x,float y,float z){
-    float xf = x / ((float)EGL_WIN_WIDTH/2);
-    float yf = -(y / ((float)EGL_WIN_HEIGHT/2));
+    float xf = x / (EGL_WIN_WIDTH/2);
+    float yf = -(y / (EGL_WIN_HEIGHT/2));
 
     return EGL_Vertex(xf-1,yf+1,z);
 }
