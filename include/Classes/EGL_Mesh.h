@@ -2,6 +2,7 @@
 
 #include "EGL_Vertex.h"
 #include "EGL_Vector.h"
+#include "EGL_Point.h"
 #include <GL/glew.h>
 #include <vector>
 
