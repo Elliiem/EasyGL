@@ -28,7 +28,6 @@ src/Classes/EGL_Hitbox.cpp
 src/Classes/EGL_Object.cpp
 src/Structs/EGL_Vector.cpp
 src/Classes/EGL_Input.cpp
-src/Classes/EGL_Physics.cpp
 )
 
 target_include_directories(EGL PUBLIC  

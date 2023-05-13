@@ -4,8 +4,7 @@ int EGL_WIN_HEIGHT;
 int EGL_WIN_WIDTH;
 float EGL_SWAP_INTERVAL = 0;
 
-EGL_Window::EGL_Window(int width, int height, std::string name)
-{
+EGL_Window::EGL_Window(int width, int height, std::string name){
     EGL_WIN_HEIGHT = height;
     EGL_WIN_WIDTH = width;
     SDL_Init(SDL_INIT_EVERYTHING);
@@ -22,8 +21,7 @@ EGL_Window::EGL_Window(int width, int height, std::string name)
 
     GLenum status = glewInit();
 
-    if(status != GLEW_OK)
-    {
+    if(status != GLEW_OK){
         std::cerr << "Glew failed to Init" << std::endl;
     }
 
@@ -31,8 +29,7 @@ EGL_Window::EGL_Window(int width, int height, std::string name)
     input = EGL_Input(&event);
 }
 
-EGL_Window::~EGL_Window()
-{
+EGL_Window::~EGL_Window(){
     SDL_GL_DeleteContext(gl_cont);
     SDL_DestroyWindow(SDL_win);
     SDL_Quit();
@@ -42,20 +39,17 @@ bool EGL_Window::ShouldQuit(){
     return quit;
 }
 
-void EGL_Window::SwapBuffers()
-{
+void EGL_Window::SwapBuffers(){
     SDL_GL_SwapWindow(SDL_win);
 }
 
 
-void EGL_Window::Clear()
-{
+void EGL_Window::Clear(){
     glClearColor(clear_col.r,clear_col.g,clear_col.b,clear_col.a);
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void EGL_Window::SetClearCol(float R,float G,float B,float A)
-{
+void EGL_Window::SetClearCol(float R,float G,float B,float A){
     clear_col = EGL_Color(R,G,B,A);
 }
 
@@ -64,8 +58,7 @@ void EGL_Window::SetClearCol(EGL_Color col){
 }
 
 
-void EGL_Window::Update()
-{
+void EGL_Window::Update(){
     SwapBuffers();
     HandleEvents();
 
@@ -77,8 +70,7 @@ void EGL_Window::Update()
 }
 
 
-void EGL_Window::HandleEvents()
-{
+void EGL_Window::HandleEvents(){
     while (SDL_PollEvent(&event)){
         switch(event.type){
             case SDL_QUIT:

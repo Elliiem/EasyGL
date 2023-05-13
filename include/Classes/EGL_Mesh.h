@@ -28,9 +28,9 @@ class EGL_Mesh{
     EGL_Vertex* verticies;
 
     private:
-    EGL_Vertex* GetVerticiesVector();
+    EGL_Vertex* GetVerticies();
     void UpdateVertexPosition(EGL_Vector pos);
-    void ChangeVerticies();
+    void BindVerticies();
 
     private:
     enum{POSITION_VB,NUM_BUFFERS};

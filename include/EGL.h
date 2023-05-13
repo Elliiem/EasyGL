@@ -14,7 +14,6 @@
 #include "EGL_Structs.h"
 #include "EGL_Window.h"
 #include "EGL_Func.h"
-#include "EGL_Physics.h"
 #include "EGL_Graphics.h"
 
 // Globals

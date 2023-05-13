@@ -7,7 +7,7 @@
 EGL_Mesh::EGL_Mesh(std::vector<EGL_Point>* points){
     this->points = points;
     this->size = points->size();
-    this->verticies = GetVerticiesVector();
+    this->verticies = GetVerticies();
 
     glGenVertexArrays(1,&vertex_array_obj);
     glBindVertexArray(vertex_array_obj);
@@ -37,26 +37,27 @@ void EGL_Mesh::Draw(){
 }
 
 void EGL_Mesh::Change(EGL_Vertex* verticies, uint8_t size){
+    delete this->verticies;
     this->verticies = verticies;
     this->size = size;
-    ChangeVerticies();
+    BindVerticies();
 }
 
 void EGL_Mesh::Change(){
-    ChangeVerticies();
+    BindVerticies();
 }
 
 void EGL_Mesh::SetPos(float x,float y,float z){
     EGL_Vector tmp(x,y,z);
     UpdateVertexPosition(tmp);
     pos = tmp;
-    ChangeVerticies();
+    BindVerticies();
 }
 
 void EGL_Mesh::SetPos(EGL_Vector pos){
     UpdateVertexPosition(pos);
     this->pos =  pos;
-    ChangeVerticies();  
+    BindVerticies();  
 }
 
 EGL_Vector EGL_Mesh::GetPos(){
@@ -64,11 +65,10 @@ EGL_Vector EGL_Mesh::GetPos(){
 }
 
 void EGL_Mesh::UpdateVertexPosition(EGL_Vector pos){
-    EGL_Vector position;
+    EGL_Vector new_pos;
     for(int i=0;i<size;i++){
-        position = EGL_UnclampCoordinates(verticies[i]);
-        EGL_Vector new_position = (position-this->pos)+pos;
-        verticies[i] = EGL_ClampCoordinates(new_position.x, new_position.y, new_position.z);
+        new_pos = (EGL_UnclampCoordinates(verticies[i])-this->pos)+pos;
+        verticies[i] = EGL_ClampCoordinates(new_pos.x, new_pos.y, new_pos.z);
     }
 }
 
@@ -78,18 +78,18 @@ void EGL_Mesh::Rotate(float x,float y,float z){
         points->at(i).RotateX(x);
         points->at(i).RotateY(y);
     }
-    Change(GetVerticiesVector(),size);
+    Change(GetVerticies(),size);
 }
 
-EGL_Vertex* EGL_Mesh::GetVerticiesVector(){
+EGL_Vertex* EGL_Mesh::GetVerticies(){
     EGL_Vertex* verticies = new EGL_Vertex[points->size()];
     for(int i = 0; i<points->size();i++){
-        verticies[i] = EGL_Vertex(EGL_ClampCoordinates(points->at(i).x+pos.x,points->at(i).y+pos.y,points->at(i).z+pos.z));
+        verticies[i] = EGL_ClampCoordinates(points->at(i).x+pos.x,points->at(i).y+pos.y,points->at(i).z+pos.z);
     }
     return verticies;
 }
 
-void EGL_Mesh::ChangeVerticies(){
+void EGL_Mesh::BindVerticies(){
     glBindVertexArray(vertex_array_obj);
     glBindBuffer(GL_ARRAY_BUFFER,vertex_array_buffers[POSITION_VB]);
     glBufferData(GL_ARRAY_BUFFER,size*sizeof(*verticies),verticies,GL_STATIC_DRAW);

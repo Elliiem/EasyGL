@@ -1,5 +1,5 @@
 #include "EGL_Graphics.h"
-#include "EGL_Physics.h"
+#include "EGL_Hitbox.h"
 
 // Helpers
 EGL_Vector ToVector(EGL_Point point){
