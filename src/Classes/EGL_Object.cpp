@@ -43,7 +43,6 @@ void EGL_Object::Update(){
     func(this);
     SetPos(pos+GetVel()+acceleration);
     acceleration = {};
-    Draw();
 }
 
 EGL_Vector EGL_Object::GetVel(){
@@ -55,6 +54,11 @@ std::vector<EGL_Vector> EGL_Object::CheckColision(EGL_Object* other){
 }
 
 void EGL_Object::SetVel(EGL_Vector vel){
+    last_pos = pos-vel;
+}
+
+void EGL_Object::SetVel(float x,float y,float z){
+    EGL_Vector vel(x,y,z);
     last_pos = pos-vel;
 }
 

@@ -4,7 +4,7 @@
 
 class EGL_Object : public EGL_Mesh{
     public:
-    EGL_Object(std::vector<EGL_Point>* points,void(*func)(EGL_Object*));
+    EGL_Object(std::vector<EGL_Point>* points, void(*func)(EGL_Object*));
     ~EGL_Object();
 
     EGL_Hitbox* box;
@@ -25,6 +25,7 @@ class EGL_Object : public EGL_Mesh{
 
     EGL_Vector GetVel();
     void SetVel(EGL_Vector vel);
+    void SetVel(float x,float y,float z);
     void AddVel(EGL_Vector add);
 
     std::vector<EGL_Vector> CheckColision(EGL_Object* other);

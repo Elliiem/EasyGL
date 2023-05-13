@@ -15,6 +15,7 @@
 #include "EGL_Window.h"
 #include "EGL_Func.h"
 #include "EGL_Graphics.h"
+#include "EGL_Game.h"
 
 // Globals
 extern int EGL_WIN_HEIGHT;

@@ -17,6 +17,9 @@ include_directories(${GLEW_INCLUDE_DIRS})
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pg")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pg")
+
 add_executable(EGL
 main.cpp 
 src/Classes/EGL_Window.cpp
@@ -28,6 +31,7 @@ src/Classes/EGL_Hitbox.cpp
 src/Classes/EGL_Object.cpp
 src/Structs/EGL_Vector.cpp
 src/Classes/EGL_Input.cpp
+src/Classes/EGL_Game.cpp
 )
 
 target_include_directories(EGL PUBLIC  
