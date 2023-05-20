@@ -1,22 +1,18 @@
 #include "EGL.h"
+EGL_Window win(1920,1080,"EGL TEST");
+EGL_Game game(&win);
 
-void std_func(EGL_Object* obj){
-    EGL_Vector pos = obj->GetPos();
-    if(pos.x <= 0 || pos.x >= 1920){
-        EGL_Vector current = obj->GetVel();
-        obj->SetVel(-current.x,current.y,current.z);
-    }else if(pos.y <= 0 || pos.y >= EGL_WIN_HEIGHT){
-        EGL_Vector current = obj->GetVel();
-        obj->SetVel(current.x,-current.y,current.z);
+int count = 0;
+
+void mouse_func(EGL_Object* obj){
+    obj->SetPos(win.input.mouse_pos.x,win.input.mouse_pos.y,0);
+    if(obj->hits.size() != 0){
+        fmt::print("Hit {}\n",count++);
     }
 }
 
 int main()
 {
-    EGL_Window win(1920,1080,"TEST");
-
-    EGL_Game game(&win);
-
     EGL_Shader shader("../shaders/basic_shader");
     shader.Bind();
 
@@ -24,9 +20,11 @@ int main()
     std::vector<EGL_Point> box_small{EGL_Point(-25,-25,0),EGL_Point(-25,25,0),EGL_Point(25,25,0),EGL_Point(25,-25,0)};
 
 
-    EGL_Object* foo = game.AddPhysicsObject(&box, std_func);
-    foo->SetPos(500,800,0);
-    foo->SetVel(EGL_Vector(1,1,0));
+    EGL_Object* foo = game.AddPhysicsObject(&box,mouse_func);
+    EGL_Object* bar = game.AddPhysicsObject(&box);
+    game.AddStaticObject(&box)->SetPos(500,500,0);
+    win.Update();
+    game.Update();
 
     while(!win.ShouldQuit())
     {

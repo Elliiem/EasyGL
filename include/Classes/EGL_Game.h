@@ -19,6 +19,9 @@ class EGL_Game{
     public:
     EGL_Object* AddPhysicsObject(std::vector<EGL_Point>* points, void(*func)(EGL_Object*));
     EGL_Object* AddStaticObject(std::vector<EGL_Point>* points, void(*func)(EGL_Object*));
+    EGL_Object* AddPhysicsObject(std::vector<EGL_Point>* points);
+    EGL_Object* AddStaticObject(std::vector<EGL_Point>* points);
     void DeleteObject(EGL_Object* obj);
     void Update();
+    void UpdateCollisions();
 };
