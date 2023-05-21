@@ -30,7 +30,6 @@ src/Structs/EGL_Point.cpp
 src/Classes/EGL_Hitbox.cpp
 src/Classes/EGL_Object/EGL_Object.cpp
 src/Classes/EGL_Object/EGL_PhysicsObject.cpp
-src/Classes/EGL_Object/EGL_StaticObject.cpp
 src/Structs/EGL_Vector.cpp
 src/Classes/EGL_Input.cpp
 src/Classes/EGL_Game.cpp
