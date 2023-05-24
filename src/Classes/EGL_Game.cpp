@@ -1,7 +1,8 @@
 #include "EGL_Game.h"
 
-EGL_Game::EGL_Game(EGL_Window* win){
+EGL_Game::EGL_Game(EGL_Window* win,EGL_Render* rend){
     this->win = win;
+    this->rend = rend;
 }
 
 EGL_Game::~EGL_Game(){
@@ -15,12 +16,12 @@ EGL_Game::~EGL_Game(){
 }
 
 
-EGL_PhysicsObject* EGL_Game::AddPhysicsObject(std::vector<EGL_Point>* points, void(*func)(EGL_PhysicsObject*)){
+EGL_PhysicsObject* EGL_Game::AddPhysicsObject(std::vector<EGL_Point>* points, void(*func)(EGL_PhysicsObject*,EGL_Window*)){
     physics_objects.emplace_back(new EGL_PhysicsObject(points,func));
     return physics_objects.back();
 }
 
-EGL_Object* EGL_Game::AddStaticObject(std::vector<EGL_Point>* points, void(*func)(EGL_Object*)){
+EGL_Object* EGL_Game::AddStaticObject(std::vector<EGL_Point>* points, void(*func)(EGL_Object*,EGL_Window*)){
     static_objects.emplace_back(new EGL_Object(points,func));
     return static_objects.back();
 }
@@ -60,13 +61,16 @@ void EGL_Game::DeleteObject(EGL_Object* obj){
 void EGL_Game::Update(){
     UpdateCollisions();
     for(int i=0;i<physics_objects.size();i++){
-        physics_objects.at(i)->Update();
-        physics_objects.at(i)->Draw();
+        physics_objects.at(i)->Update(win);
+        physics_objects.at(i)->Draw(rend);
     }
     for(int i=0;i<static_objects.size();i++){
-        static_objects.at(i)->Update();
-        static_objects.at(i)->Draw();
+        static_objects.at(i)->Update(win);
+        static_objects.at(i)->Draw(rend);
     }
+
+    win->Update();
+    rend->Update();
 }
 
 void EGL_Game::UpdateCollisions(){

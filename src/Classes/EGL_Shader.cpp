@@ -1,4 +1,5 @@
 #include "EGL.h"
+#include "EGL_Shader.h"
 
 void PrintSError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage){
     GLint success = 0;
@@ -65,8 +66,7 @@ GLuint CreateShader(const std::string& code,GLenum shaderType){
 }
 
 
-EGL_Shader::EGL_Shader(const std::string& file_name)
-{
+EGL_Shader::EGL_Shader(const std::string& file_name){
     program = glCreateProgram();
     shaders[0] = CreateShader(LoadShader(file_name + ".vs"), GL_VERTEX_SHADER);
     shaders[1] = CreateShader(LoadShader(file_name + ".fs"), GL_FRAGMENT_SHADER);
@@ -81,12 +81,12 @@ EGL_Shader::EGL_Shader(const std::string& file_name)
 
     glValidateProgram(program);
     PrintSError(program,GL_VALIDATE_STATUS,true,"Error: Program linking failed");
+
+    col = glGetUniformLocation(program,"col");
 }
 
-EGL_Shader::~EGL_Shader()
-{
-    for(uint8_t i = 0;i<NUM_SHADERS;i++)
-    {
+EGL_Shader::~EGL_Shader(){
+    for(uint8_t i = 0;i<NUM_SHADERS;i++){
         glDetachShader(program,shaders[i]);
         glDeleteShader(shaders[i]);
     }
@@ -94,7 +94,10 @@ EGL_Shader::~EGL_Shader()
     glDeleteProgram(program);
 }
 
-void EGL_Shader::Bind()
-{
+void EGL_Shader::Bind(){
     glUseProgram(program);
+}
+
+void EGL_Shader::SetCol(float r, float g, float b, float a){
+    glUniform4f(col,r,g,b,a);
 }

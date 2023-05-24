@@ -5,7 +5,7 @@
 
 class EGL_PhysicsObject : public EGL_Object{
     public:
-    EGL_PhysicsObject(std::vector<EGL_Point>* points,void(*func)(EGL_PhysicsObject*));
+    EGL_PhysicsObject(std::vector<EGL_Point>* points,void(*func)(EGL_PhysicsObject*,EGL_Window*));
     EGL_PhysicsObject(std::vector<EGL_Point>* points);
     ~EGL_PhysicsObject();
 
@@ -23,11 +23,9 @@ class EGL_PhysicsObject : public EGL_Object{
 
     EGL_Hitbox* box;
     std::vector<HitInfo> hits;
-    void (*func)(EGL_PhysicsObject*);
+    void (*func)(EGL_PhysicsObject*,EGL_Window*);
 
     public:
-    void Draw();
-    void Draw(float x, float y, float z);
     void SetPos(float x,float y,float z);
     void SetPos(EGL_Vector pos);
     void Rotate(float x,float y,float z);    
@@ -45,7 +43,7 @@ class EGL_PhysicsObject : public EGL_Object{
 
     std::vector<EGL_Vector> CheckColision(EGL_PhysicsObject* other);
 
-    void Update();
+    void Update(EGL_Window* win);
 
     private:
     EGL_Vector last_pos;

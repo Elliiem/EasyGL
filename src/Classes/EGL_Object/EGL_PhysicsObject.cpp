@@ -1,10 +1,10 @@
 #include "EGL_PhysicsObject.h"
 
-void default_func(EGL_PhysicsObject* obj){
+void default_func(EGL_PhysicsObject* obj,EGL_Window* win){
 
 }
 
-EGL_PhysicsObject::EGL_PhysicsObject(std::vector<EGL_Point>* points,void(*func)(EGL_PhysicsObject*)) : EGL_Object(points){
+EGL_PhysicsObject::EGL_PhysicsObject(std::vector<EGL_Point>* points,void(*func)(EGL_PhysicsObject*,EGL_Window*)) : EGL_Object(points){
     this->box = new EGL_Hitbox(points);
     this->func = func;
 }
@@ -17,16 +17,6 @@ EGL_PhysicsObject::EGL_PhysicsObject(std::vector<EGL_Point>* points) : EGL_Objec
 
 EGL_PhysicsObject::~EGL_PhysicsObject(){
     delete box;
-}
-
-void EGL_PhysicsObject::Draw(){
-    EGL_Mesh::Draw();
-}
-
-void EGL_PhysicsObject::Draw(float x,float y,float z){
-    EGL_Mesh::Draw();
-    EGL_Mesh::SetPos(x,y,z);
-    box->SetPos(x,y,z);
 }
 
 void EGL_PhysicsObject::SetPos(float x,float y,float z){
@@ -95,8 +85,8 @@ std::vector<EGL_Vector> EGL_PhysicsObject::CheckColision(EGL_PhysicsObject *othe
 }
 
 
-void EGL_PhysicsObject::Update(){
-    func(this);
+void EGL_PhysicsObject::Update(EGL_Window* win){
+    func(this,win);
 
     EGL_Vector vel = GetVel();
     last_pos = pos;

@@ -33,6 +33,7 @@ src/Classes/EGL_Object/EGL_PhysicsObject.cpp
 src/Structs/EGL_Vector.cpp
 src/Classes/EGL_Input.cpp
 src/Classes/EGL_Game.cpp
+src/Classes/EGL_Render.cpp
 )
 
 target_include_directories(EGL PUBLIC  

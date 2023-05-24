@@ -9,17 +9,18 @@
 
 class EGL_Game{
     public:
-    EGL_Game(EGL_Window* win);
+    EGL_Game(EGL_Window* win,EGL_Render* rend);
     ~EGL_Game();
 
     std::vector<EGL_PhysicsObject*> physics_objects;
     std::vector<EGL_Object*> static_objects;
 
     EGL_Window* win;
+    EGL_Render* rend;
 
     public:
-    EGL_PhysicsObject* AddPhysicsObject(std::vector<EGL_Point>* points, void(*func)(EGL_PhysicsObject*));
-    EGL_Object* AddStaticObject(std::vector<EGL_Point>* points, void(*func)(EGL_Object*));
+    EGL_PhysicsObject* AddPhysicsObject(std::vector<EGL_Point>* points, void(*func)(EGL_PhysicsObject*,EGL_Window*));
+    EGL_Object* AddStaticObject(std::vector<EGL_Point>* points, void(*func)(EGL_Object*,EGL_Window*));
     EGL_PhysicsObject* AddPhysicsObject(std::vector<EGL_Point>* points);
     EGL_Object* AddStaticObject(std::vector<EGL_Point>* points);
     
