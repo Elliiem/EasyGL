@@ -2,7 +2,11 @@
 
 #include "EGL_Hitbox.h"
 #include "EGL_Window.h"
+#include "EGL_Mesh.h"
 #include "EGL_Render.h"
+#include "EGL_Vector.h"
+
+#include <vector>
 
 class EGL_Object : public EGL_Mesh{
     public:
@@ -19,10 +23,6 @@ class EGL_Object : public EGL_Mesh{
     
     void Update(EGL_Window* win);
 
-    void SetCol(EGL_Color col);
-    void SetCol(float r,float g,float b,float a);
-
     private:
-    EGL_Color col = EGL_Color(0.25f,0.25f,0.25f,1.0f);
     std::vector<EGL_Object*> children;
 };

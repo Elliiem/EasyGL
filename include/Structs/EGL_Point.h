@@ -19,4 +19,10 @@ struct EGL_Point{
     void RotateZ(float deg);
     void RotateX(float deg);
     void RotateY(float deg);
+
+    EGL_Point operator+(EGL_Point other);
+    EGL_Point operator-(EGL_Point other);
+    EGL_Vector operator+(EGL_Vector other);
+    EGL_Vector operator-(EGL_Vector other);
+
 };

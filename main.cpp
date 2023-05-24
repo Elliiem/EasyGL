@@ -6,6 +6,7 @@ void mouse_func(EGL_PhysicsObject* obj, EGL_Window* win){
     if(obj->hits.size() != 0){
         fmt::print("Hit {}\n",count++);
     }
+    obj->Rotate(0,0,0.001);
 }
 
 int main()

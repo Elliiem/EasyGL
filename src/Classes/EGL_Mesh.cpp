@@ -3,6 +3,7 @@
 #include "EGL_Point.h"
 #include "EGL_Func.h"
 #include "EGL_Mesh.h"
+#include "EGL_Render.h"
 
 EGL_Mesh::EGL_Mesh(std::vector<EGL_Point>* points){
     this->points = points;
@@ -26,7 +27,8 @@ EGL_Mesh::~EGL_Mesh(){
     glDeleteVertexArrays(1, &vertex_array_obj);
 }
 
-void EGL_Mesh::Draw(){
+void EGL_Mesh::Draw(EGL_Render* rend){
+    rend->SetDrawCol(col);
     UpdateVertexPosition(this->pos);
 
     glBindVertexArray(vertex_array_obj);
@@ -62,6 +64,14 @@ void EGL_Mesh::SetPos(EGL_Vector pos){
 
 EGL_Vector EGL_Mesh::GetPos(){
     return pos;
+}
+
+void EGL_Mesh::SetCol(EGL_Color col){
+    this->col = col;
+}
+
+void EGL_Mesh::SetCol(float r, float g, float b, float a){
+    this->col = EGL_Color(r,g,b,a);
 }
 
 void EGL_Mesh::UpdateVertexPosition(EGL_Vector pos){
