@@ -11,13 +11,19 @@ class EGL_Input{
     EGL_Input(SDL_Event* event);
     EGL_Input(){};
 
-    std::map<int,bool>keyboard;
     EGL_Vector mouse_pos;
 
+    bool IsPressed(int key);
+    bool IsPushed(int key);
+
+
     void HandleInputs();
+    void Update();
 
     private:
     SDL_Event* event;
+    std::map<int,bool>keyboard;
+    std::map<int,bool>last_keyboard;
 
     void KeyUp();
     void KeyDown();

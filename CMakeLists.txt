@@ -34,6 +34,7 @@ src/Structs/EGL_Vector.cpp
 src/Classes/EGL_Input.cpp
 src/Classes/EGL_Game.cpp
 src/Classes/EGL_Render.cpp
+src/Classes/EGL_Text.cpp
 )
 
 target_include_directories(EGL PUBLIC  

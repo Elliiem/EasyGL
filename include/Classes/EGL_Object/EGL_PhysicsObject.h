@@ -5,19 +5,19 @@
 
 class EGL_PhysicsObject : public EGL_Object{
     public:
-    EGL_PhysicsObject(std::vector<EGL_Point>* points,void(*func)(EGL_PhysicsObject*,EGL_Window*));
-    EGL_PhysicsObject(std::vector<EGL_Point>* points);
+    EGL_PhysicsObject(std::vector<EGL_Point>* points,void(*func)(EGL_PhysicsObject*,EGL_Window*),std::string id);
+    EGL_PhysicsObject(std::vector<EGL_Point>* points,std::string id);
     ~EGL_PhysicsObject();
 
     struct HitInfo{
-        HitInfo(EGL_Object* other, std::vector<EGL_Vector> hit_points,std::vector<EGL_Hitbox*> box = {}){
+        HitInfo(EGL_PhysicsObject* other, std::vector<EGL_Vector> hit_points,std::vector<EGL_Hitbox*> box = {}){
             this->other = other;
             this->hit_points = hit_points;
             this->box = box;
         }
 
         std::vector<EGL_Hitbox*> box;
-        EGL_Object* other;
+        EGL_PhysicsObject* other;
         std::vector<EGL_Vector> hit_points;
     };
 
@@ -41,11 +41,16 @@ class EGL_PhysicsObject : public EGL_Object{
     void Accelerate(EGL_Vector acc);
     EGL_Vector GetVel();
 
-    std::vector<EGL_Vector> CheckColision(EGL_PhysicsObject* other);
+    std::vector<EGL_Vector> Collide(EGL_PhysicsObject* other);
+    HitInfo* FindHit(std::string id);
 
     void Update(EGL_Window* win);
+
+    EGL_PhysicsObject* AddChild(std::vector<EGL_Point>* points,void(*func)(EGL_PhysicsObject*,EGL_Window*),std::string id);
+    void RemoveChild(EGL_PhysicsObject* obj);
 
     private:
     EGL_Vector last_pos;
     EGL_Vector acceleration;
+    std::vector<EGL_PhysicsObject*> children;
 };

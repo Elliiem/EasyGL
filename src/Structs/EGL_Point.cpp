@@ -1,4 +1,3 @@
-#include "EGL_Structs.h"
 #include "EGL_Point.h"
 
 //Helpers
@@ -89,14 +88,6 @@ void EGL_Point::RotateY(float deg){
   }
   x = (vec.x*cos(Rad(rot.y)))+(vec.z*sin(Rad(rot.y)));
   z = (vec.x*(-sin(Rad(rot.y))))+(vec.z*cos(Rad(rot.y)));
-}
-
-EGL_Point EGL_Point::operator+(EGL_Point other){
-  return EGL_Point(x+other.x,y+other.y,z+other.z);
-}
-
-EGL_Point EGL_Point::operator-(EGL_Point other){
-  return EGL_Point(x-other.x,y-other.y,z-other.z);
 }
 
 EGL_Vector EGL_Point::operator+(EGL_Vector other){

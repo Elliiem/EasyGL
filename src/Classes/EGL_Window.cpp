@@ -47,9 +47,10 @@ void EGL_Window::SwapBuffers(){
 
 void EGL_Window::Update(){
     SwapBuffers();
+    input.Update();
     HandleEvents();
 
-    if(input.keyboard[SDLK_z] && input.keyboard[SDLK_LCTRL]){
+    if(input.IsPushed(SDLK_z) && input.IsPushed(SDLK_LCTRL)){
         quit = true;
     }
 }

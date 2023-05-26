@@ -1,12 +1,12 @@
 #include "EGL.h"
+#include <fmt/format.h>
 int count = 0;
 
 void mouse_func(EGL_PhysicsObject* obj, EGL_Window* win){
     obj->SetPos(win->input.mouse_pos.x,win->input.mouse_pos.y,0);
-    if(obj->hits.size() != 0){
+    if(obj->FindHit("collider_1")){
         fmt::print("Hit {}\n",count++);
     }
-    obj->Rotate(0,0,0.001);
 }
 
 int main()
@@ -19,17 +19,14 @@ int main()
     std::vector<EGL_Point> box{EGL_Point(-50,-50,0),EGL_Point(-50,50,0),EGL_Point(50,50,0),EGL_Point(50,-50,0)};
     std::vector<EGL_Point> box_small{EGL_Point(-25,-25,0),EGL_Point(-25,25,0),EGL_Point(25,25,0),EGL_Point(25,-25,0)};
 
-    EGL_PhysicsObject* foo = game.AddPhysicsObject(&box,mouse_func);
-    EGL_PhysicsObject* bar = game.AddPhysicsObject(&box);
-    game.AddStaticObject(&box)->SetPos(600,600,0);
+    EGL_PhysicsObject* foo = game.AddPhysicsObject(&box,mouse_func,"mouse_1");
+    EGL_PhysicsObject* bar = game.AddPhysicsObject(&box,"collider_1");
+    game.AddPhysicsObject(&box,"collider_2")->SetPos(800,100,0);
+    game.AddStaticObject(&box,"static_box_1")->SetPos(600,600,0);
 
     foo->SetCol(1.0f,0.0f,1.0f,1.0f);
 
-    win.Update();
-    game.Update();
-
-    while(!win.ShouldQuit())
-    {
+    while(!win.ShouldQuit()){
         game.Update();
     }
 

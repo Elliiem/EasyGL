@@ -19,10 +19,10 @@ class EGL_Game{
     EGL_Render* rend;
 
     public:
-    EGL_PhysicsObject* AddPhysicsObject(std::vector<EGL_Point>* points, void(*func)(EGL_PhysicsObject*,EGL_Window*));
-    EGL_Object* AddStaticObject(std::vector<EGL_Point>* points, void(*func)(EGL_Object*,EGL_Window*));
-    EGL_PhysicsObject* AddPhysicsObject(std::vector<EGL_Point>* points);
-    EGL_Object* AddStaticObject(std::vector<EGL_Point>* points);
+    EGL_PhysicsObject* AddPhysicsObject(std::vector<EGL_Point>* points,void(*func)(EGL_PhysicsObject*,EGL_Window*),std::string id);
+    EGL_Object* AddStaticObject(std::vector<EGL_Point>* points,void(*func)(EGL_Object*,EGL_Window*),std::string id);
+    EGL_PhysicsObject* AddPhysicsObject(std::vector<EGL_Point>* points,std::string id);
+    EGL_Object* AddStaticObject(std::vector<EGL_Point>* points,std::string id);
     
     void DeleteObject(EGL_Object* obj);
     void Update();

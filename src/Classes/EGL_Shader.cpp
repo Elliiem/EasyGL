@@ -1,21 +1,21 @@
-#include "EGL.h"
 #include "EGL_Shader.h"
 
 void PrintSError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage){
     GLint success = 0;
-    GLchar error[1024] = { 0 };
+    GLchar error[1024] = {0};
 
-    if(isProgram)
+    if(isProgram){
         glGetProgramiv(shader, flag, &success);
-    else
+    } else {
         glGetShaderiv(shader, flag, &success);
+    }
 
-    if(success == GL_FALSE)
-    {
-        if(isProgram)
+    if(success == GL_FALSE){
+        if(isProgram){
             glGetProgramInfoLog(shader, sizeof(error), NULL, error);
-        else
+        } else {
             glGetShaderInfoLog(shader, sizeof(error), NULL, error);
+        }
 
         std::cerr << errorMessage << ": '" << error << "'" << std::endl;
     }
@@ -28,26 +28,22 @@ std::string LoadShader(const std::string& fileName){
     std::string output;
     std::string line;
 
-    if(file.is_open())
-    {
-        while(file.good())
-        {
+    if(file.is_open()){
+        while(file.good()){
             getline(file, line);
             output.append(line + "\n");
         }
-    }
-    else
-    {
+    } else {
         std::cerr << "Unable to load shader: " << fileName << std::endl;
     }
+    
     return output;
 }
 
 GLuint CreateShader(const std::string& code,GLenum shaderType){
     GLuint shader = glCreateShader(shaderType);
 
-    if(shader == 0)
-    {
+    if(shader == 0){
         std::cerr << "Error: shader creation failed" << std::endl;
     }
 
@@ -71,8 +67,9 @@ EGL_Shader::EGL_Shader(const std::string& file_name){
     shaders[0] = CreateShader(LoadShader(file_name + ".vs"), GL_VERTEX_SHADER);
     shaders[1] = CreateShader(LoadShader(file_name + ".fs"), GL_FRAGMENT_SHADER);
 
-    for(uint8_t i = 0;i<NUM_SHADERS;i++)
+    for(uint8_t i = 0;i<NUM_SHADERS;i++){
         glAttachShader(program, shaders[i]);
+    }
 
     glBindAttribLocation(program,0,"pos");
 

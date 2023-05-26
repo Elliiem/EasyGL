@@ -1,4 +1,3 @@
-#include "EGL_Graphics.h"
 #include "EGL_Hitbox.h"
 
 // Helpers
@@ -48,17 +47,22 @@ std::vector<EGL_Vector> EGL_Hitbox::CheckCollision(EGL_Hitbox* other){
     std::vector<EGL_Vector> point_hits;
     int intersections = 0;
 
-    for(int ai=0; ai<points->size(); ai++){
-        for(int bi=0; bi<other->points->size()-1;bi++){
-            if(LineIntersect(other->points->at(bi)+other->pos, other->points->at(bi+1)+other->pos, points->at(ai)+pos)){
+    std::vector<EGL_Point>::iterator this_iter;
+    std::vector<EGL_Point>::iterator other_iter;
+
+    for(this_iter = points->begin();this_iter < points->end(); this_iter++){
+        for(other_iter = other->points->begin();other_iter < other->points->end()-1;other_iter++){
+            if(LineIntersect(*other_iter+other->pos, *(other_iter+1)+other->pos,*this_iter + pos)){
                 intersections++;
             }
         }
-        if(LineIntersect(other->points->back()+other->pos, other->points->at(0)+other->pos, points->at(ai)+pos)){
+        if(LineIntersect(other->points->back()+other->pos, other->points->at(0)+other->pos, *this_iter+pos)){
             intersections++;
-        }        
+        }
 
-        if(intersections%2 != 0) point_hits.push_back(ToVector(points->at(ai)));
+        if(intersections % 2 != 0){
+            point_hits.push_back(ToVector(*this_iter));
+        }
 
         intersections = 0;
     }

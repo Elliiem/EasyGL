@@ -1,9 +1,12 @@
-#include <GL/glew.h>
-#include <vector>
 #include "EGL_Point.h"
 #include "EGL_Func.h"
 #include "EGL_Mesh.h"
 #include "EGL_Render.h"
+
+#include <GL/glew.h>
+
+#include <vector>
+
 
 EGL_Mesh::EGL_Mesh(std::vector<EGL_Point>* points){
     this->points = points;
@@ -93,9 +96,11 @@ void EGL_Mesh::Rotate(float x,float y,float z){
 
 EGL_Vertex* EGL_Mesh::GetVerticies(){
     EGL_Vertex* verticies = new EGL_Vertex[points->size()];
+
     for(int i = 0; i<points->size();i++){
         verticies[i] = EGL_ClampCoordinates(points->at(i).x+pos.x,points->at(i).y+pos.y,points->at(i).z+pos.z);
     }
+
     return verticies;
 }
 
@@ -103,5 +108,5 @@ void EGL_Mesh::BindVerticies(){
     glBindVertexArray(vertex_array_obj);
     glBindBuffer(GL_ARRAY_BUFFER,vertex_array_buffers[POSITION_VB]);
     glBufferData(GL_ARRAY_BUFFER,size*sizeof(*verticies),verticies,GL_STATIC_DRAW);
-    glBindVertexArray(0);    
+    glBindVertexArray(0);
 }

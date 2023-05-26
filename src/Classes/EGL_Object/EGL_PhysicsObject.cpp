@@ -1,18 +1,16 @@
 #include "EGL_PhysicsObject.h"
 
-void default_func(EGL_PhysicsObject* obj,EGL_Window* win){
+void no_op(EGL_PhysicsObject* obj,EGL_Window* win){}
 
-}
-
-EGL_PhysicsObject::EGL_PhysicsObject(std::vector<EGL_Point>* points,void(*func)(EGL_PhysicsObject*,EGL_Window*)) : EGL_Object(points){
+EGL_PhysicsObject::EGL_PhysicsObject(std::vector<EGL_Point>* points,void(*func)(EGL_PhysicsObject*,EGL_Window*),std::string id) : EGL_Object(points,id){
     this->box = new EGL_Hitbox(points);
     this->func = func;
 }
 
 
-EGL_PhysicsObject::EGL_PhysicsObject(std::vector<EGL_Point>* points) : EGL_Object(points){
+EGL_PhysicsObject::EGL_PhysicsObject(std::vector<EGL_Point>* points,std::string id) : EGL_Object(points,id){
     this->box = new EGL_Hitbox(points);
-    this->func = default_func;
+    this->func = no_op;
 }
 
 EGL_PhysicsObject::~EGL_PhysicsObject(){
@@ -22,11 +20,13 @@ EGL_PhysicsObject::~EGL_PhysicsObject(){
 void EGL_PhysicsObject::SetPos(float x,float y,float z){
     EGL_Mesh::SetPos(x,y,z);
     box->SetPos(x,y,z);
+    last_pos = pos;
 }
 
 void EGL_PhysicsObject::SetPos(EGL_Vector pos){
     EGL_Mesh::SetPos(pos);
     box->SetPos(pos);
+    last_pos = pos;
 }
 
 void EGL_PhysicsObject::Rotate(float x,float y,float z){
@@ -76,7 +76,7 @@ EGL_Vector EGL_PhysicsObject::GetVel(){
     return pos - last_pos;
 }
 
-std::vector<EGL_Vector> EGL_PhysicsObject::CheckColision(EGL_PhysicsObject *other){
+std::vector<EGL_Vector> EGL_PhysicsObject::Collide(EGL_PhysicsObject *other){
     std::vector<EGL_Vector> col = box->CheckCollision(other->box);
     if(col.size() != 0){
         hits.emplace_back(HitInfo(other,col));
@@ -84,6 +84,12 @@ std::vector<EGL_Vector> EGL_PhysicsObject::CheckColision(EGL_PhysicsObject *othe
     return col;
 }
 
+EGL_PhysicsObject::HitInfo* EGL_PhysicsObject::FindHit(std::string id){
+    for(int i=0;i<hits.size();i++){
+        if(hits.at(i).other->id == id) return &hits.at(i);
+    }
+    return nullptr;
+}
 
 void EGL_PhysicsObject::Update(EGL_Window* win){
     func(this,win);
@@ -94,4 +100,20 @@ void EGL_PhysicsObject::Update(EGL_Window* win){
 
     hits.clear();
     hits.shrink_to_fit();
+}
+
+EGL_PhysicsObject *EGL_PhysicsObject::AddChild(std::vector<EGL_Point> *points, void (*func)(EGL_PhysicsObject *, EGL_Window *), std::string id){
+    children.emplace_back(new EGL_PhysicsObject(points,func,id));
+    return children.back();
+}
+
+void EGL_PhysicsObject::RemoveChild(EGL_PhysicsObject *obj){
+    for(int i=0;i<children.size();i++){
+        if(children.at(i) == obj){
+            children.erase(children.begin()+i);
+            delete obj;
+            return;
+        }
+    }
+    std::cerr << "\033[31;1mEGL_PhysicsObject::RemoveChild Couldnt find Child!\033[0m\n";
 }

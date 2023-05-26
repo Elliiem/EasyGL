@@ -16,23 +16,23 @@ EGL_Game::~EGL_Game(){
 }
 
 
-EGL_PhysicsObject* EGL_Game::AddPhysicsObject(std::vector<EGL_Point>* points, void(*func)(EGL_PhysicsObject*,EGL_Window*)){
-    physics_objects.emplace_back(new EGL_PhysicsObject(points,func));
+EGL_PhysicsObject* EGL_Game::AddPhysicsObject(std::vector<EGL_Point>* points,void(*func)(EGL_PhysicsObject*,EGL_Window*),std::string id){
+    physics_objects.emplace_back(new EGL_PhysicsObject(points,func,id));
     return physics_objects.back();
 }
 
-EGL_Object* EGL_Game::AddStaticObject(std::vector<EGL_Point>* points, void(*func)(EGL_Object*,EGL_Window*)){
-    static_objects.emplace_back(new EGL_Object(points,func));
+EGL_Object* EGL_Game::AddStaticObject(std::vector<EGL_Point>* points, void(*func)(EGL_Object*,EGL_Window*),std::string id){
+    static_objects.emplace_back(new EGL_Object(points,func,id));
     return static_objects.back();
 }
 
-EGL_PhysicsObject* EGL_Game::AddPhysicsObject(std::vector<EGL_Point>* points){
-    physics_objects.emplace_back(new EGL_PhysicsObject(points));
+EGL_PhysicsObject* EGL_Game::AddPhysicsObject(std::vector<EGL_Point>* points,std::string id){
+    physics_objects.emplace_back(new EGL_PhysicsObject(points,id));
     return physics_objects.back();
 }
 
-EGL_Object* EGL_Game::AddStaticObject(std::vector<EGL_Point>* points){
-    static_objects.emplace_back(new EGL_Object(points));
+EGL_Object* EGL_Game::AddStaticObject(std::vector<EGL_Point>* points,std::string id){
+    static_objects.emplace_back(new EGL_Object(points,id));
     return static_objects.back();
 }
 
@@ -77,7 +77,7 @@ void EGL_Game::UpdateCollisions(){
     for(int i=0;i<physics_objects.size();i++){
         for(int ii=0;ii<physics_objects.size();ii++){
             if(physics_objects.at(i) != physics_objects.at(ii)){
-                physics_objects.at(i)->CheckColision(physics_objects.at(ii));
+                physics_objects.at(i)->Collide(physics_objects.at(ii));
             }
         }
     }

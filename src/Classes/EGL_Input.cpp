@@ -4,7 +4,20 @@ EGL_Input::EGL_Input(SDL_Event* event){
     this->event = event;
 }
 
-void EGL_Input::HandleInputs(){
+bool EGL_Input::IsPressed(int key){
+    try{return !last_keyboard.at(key) && keyboard.at(key);}
+    catch(std::exception&){return false;}
+}
+
+bool EGL_Input::IsPushed(int key){
+    try{return keyboard.at(key);}
+    catch(std::exception&){
+        return false;
+    }
+}
+
+void EGL_Input::HandleInputs()
+{
     switch(event->type){
         case SDL_KEYDOWN:
             KeyDown();
@@ -18,11 +31,14 @@ void EGL_Input::HandleInputs(){
     };
 }
 
+void EGL_Input::Update(){
+    last_keyboard = keyboard;
+}
+
 void EGL_Input::KeyUp(){
     try{
         keyboard.at(event->key.keysym.sym) = false;
-    }
-    catch (const std::exception&){
+    } catch (const std::exception&){
         keyboard.insert({event->key.keysym.sym,false});
     }
 }
@@ -30,8 +46,7 @@ void EGL_Input::KeyUp(){
 void EGL_Input::KeyDown(){
     try{
         keyboard.at(event->key.keysym.sym) = true;
-    }
-    catch (const std::exception&){
+    } catch (const std::exception&){
         keyboard.insert({event->key.keysym.sym,true});
     }
 }

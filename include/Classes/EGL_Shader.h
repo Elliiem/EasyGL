@@ -2,6 +2,8 @@
 
 #include <GL/glew.h>
 
+#include <fstream>
+#include <iostream>
 #include <string>
 
 class EGL_Shader{
