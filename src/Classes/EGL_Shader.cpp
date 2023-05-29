@@ -78,8 +78,6 @@ EGL_Shader::EGL_Shader(const std::string& file_name){
 
     glValidateProgram(program);
     PrintSError(program,GL_VALIDATE_STATUS,true,"Error: Program linking failed");
-
-    col = glGetUniformLocation(program,"col");
 }
 
 EGL_Shader::~EGL_Shader(){
@@ -93,8 +91,4 @@ EGL_Shader::~EGL_Shader(){
 
 void EGL_Shader::Bind(){
     glUseProgram(program);
-}
-
-void EGL_Shader::SetCol(float r, float g, float b, float a){
-    glUniform4f(col,r,g,b,a);
 }

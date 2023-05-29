@@ -14,11 +14,11 @@ void EGL_Render::SetClearCol(EGL_Color col){
 }
 
 void EGL_Render::SetDrawCol(float r, float g, float b, float a){
-    shader->SetCol(r,g,b,a);
+    glColor4f(r,g,b,a);
 }
 
 void EGL_Render::SetDrawCol(EGL_Color col){
-    shader->SetCol(col.r,col.g,col.b,col.a);
+    glColor4f(col.r,col.g,col.b,col.a);
 }
 
 void EGL_Render::Clear(){

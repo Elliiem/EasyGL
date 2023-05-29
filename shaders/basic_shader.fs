@@ -1,6 +1,4 @@
-uniform vec4 col;
 
-void main()
-{
-    gl_FragColor = col;
+void main(){
+    gl_FragColor = gl_Color;
 }

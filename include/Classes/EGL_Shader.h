@@ -18,5 +18,4 @@ class EGL_Shader{
     static const unsigned int NUM_SHADERS = 2;
     GLuint program;
     GLuint shaders[NUM_SHADERS];
-    uint8_t col;
 };

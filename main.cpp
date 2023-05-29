@@ -3,7 +3,7 @@
 int count = 0;
 
 void mouse_func(EGL_PhysicsObject* obj, EGL_Window* win){
-    obj->SetPos(win->input.mouse_pos.x,win->input.mouse_pos.y,0);
+    obj->SetPos(win->input.mouse_pos.x,win->input.mouse_pos.y,0.5);
     if(obj->FindHit("collider_1")){
         fmt::print("Hit {}\n",count++);
     }
